@@ -1,0 +1,206 @@
+/* Estilo general de la página */
+body {
+    background-color: #f7f1f9; /* Fondo suave pastel */
+    font-family: 'Poppins', sans-serif;
+    color: #444;
+}
+
+/* Contenedor principal */
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e0c3fc; /* Borde aesthetic */
+}
+
+/* Estilo del encabezado */
+h1, h2 {
+    color: #000; /* Negro */
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;  
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #c1a1d3; /* Morado pastel */
+    color: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #dcdcdc; 
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; 
+}
+
+tr:hover {
+    background: #f5ebff;
+}
+
+/* Botones */
+button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    font-weight: 600;
+    color: black;
+}
+
+.btn-info {
+    background-color: #a278ff;
+}
+
+.btn-info:hover {
+    background-color: #7a4cff;
+}
+
+.btn-danger {
+    background-color: #ff6b6b;
+}
+
+.btn-danger:hover {
+    background-color: #ff4040;
+}
+
+.btn-primary {
+    background-color: #a278ff;
+}
+
+.btn-primary:hover {
+    background-color: #7a4cff;
+}
+
+.btn-success {
+    background-color: #78c2ad;
+}
+
+.btn-success:hover {
+    background-color: #4da891;
+}
+
+button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* Formulario */
+.form-label {
+    color: #5a3e85;
+    font-weight: 500;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1.5px solid #d8b6ff;
+    padding: 10px;
+    background-color: #fefaff;
+    color: #333;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-control:focus {
+    border-color: #a675ff;
+    box-shadow: 0 0 5px #d5a3ff;
+}
+
+/* Mensajes de error */
+.text-danger {
+    color: #ff6b6b;
+    font-size: 12px;
+}
+
+/* Espaciado para los formularios */
+.mb-3 {
+    margin-bottom: 20px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: #c1a1d3; /* Morado pastel */
+    color: white;
+    font-weight: 600;
+}
+
+tr {
+    transition: background 0.3s ease-in-out;
+}
+
+tr:hover {
+    background: #f5ebff;
+}
+/* Botones aesthetic con efecto hover */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    color: black; /* Negro */
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.btn-primary {
+    background: #a278ff;
+}
+
+.btn-warning {
+    background: #ffb677;
+}
+
+.btn-danger {
+    background: #ff6b6b;
+}
+
+.btn-success {
+    background: #78c2ad;
+}
+
+/* Efecto hover en los botones */
+.btn-primary:hover {
+    background: #7a4cff; /* Morado más intenso */
+}
+
+.btn-warning:hover {
+    background: #ff9e4d; /* Naranja más fuerte */
+}
+
+.btn-danger:hover {
+    background: #ff4040; /* Rojo más vibrante */
+}
+
+.btn-success:hover {
+    background: #4da891; /* Verde más profundo */
+}
+
+button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}

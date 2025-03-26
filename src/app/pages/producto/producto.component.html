@@ -1,0 +1,89 @@
+<div style="margin: 20px;">
+    <h1>GESTIÓN DE PRODUCTOS</h1>
+    <h2>Lista de Productos</h2>
+
+    @if (productos.length > 0) {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Stock</th>
+                    <th>Proveedor</th>
+                    <th>Costo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (producto of productos; track producto.id) {
+                    <tr>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.categoria }}</td>
+                        <td>{{ producto.stock }}</td>
+                        <td>{{ producto.proveedor }}</td>
+                        <td>${{ producto.costo }}</td>
+                        <td>
+                            <button class="btn btn-info" (click)="selectProducto(producto)">Editar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    } @else {
+        <h3>No hay productos disponibles</h3>
+    }
+
+    <div>
+        <h3>Formulario de Productos</h3>
+        <form #productoForm="ngForm">
+            <div>
+                <label>NOMBRE:</label>
+                <input type="text" class="form-control" [(ngModel)]="producto.nombre" name="nombre" required #nombre="ngModel"/>
+                @if (nombre.invalid && nombre.touched) {
+                    <small class="text-danger">Debe registrar un nombre de producto.</small>
+                }
+            </div>
+
+            <div>
+                <label>CATEGORÍA:</label>
+                <select class="form-control" [(ngModel)]="producto.categoria" name="categoria" required #categoria="ngModel">
+                    <option value="">Seleccione una categoría</option>
+                    <option value="Vidrios">Vidrios</option>
+                    <option value="Aluminios">Aluminios</option>
+                    <option value="Accesorios">Accesorios</option>
+                </select>
+                @if (categoria.invalid && categoria.touched) {
+                    <small class="text-danger">Debe seleccionar una categoría.</small>
+                }
+            </div>
+
+            <div>
+                <label>STOCK:</label>
+                <input type="number" class="form-control" [(ngModel)]="producto.stock" name="stock" required #stock="ngModel"/>
+                @if (stock.invalid && stock.touched) {
+                    <small class="text-danger">Debe registrar la cantidad en stock.</small>
+                }
+            </div>
+
+            <div>
+                <label>PROVEEDOR:</label>
+                <input type="text" class="form-control" [(ngModel)]="producto.proveedor" name="proveedor" required #proveedor="ngModel"/>
+                @if (proveedor.invalid && proveedor.touched) {
+                    <small class="text-danger">Debe registrar el proveedor.</small>
+                }
+            </div>
+
+            <div>
+                <label>COSTO:</label>
+                <input type="number" class="form-control" [(ngModel)]="producto.costo" name="costo" required #costo="ngModel"/>
+                @if (costo.invalid && costo.touched) {
+                    <small class="text-danger">Debe registrar el costo del producto.</small>
+                }
+            </div>
+
+            <button type="button" class="btn btn-primary" (click)="insertarProducto()" [disabled]="productoForm.invalid">Agregar</button>
+            <button type="button" class="btn btn-warning" (click)="updateProducto()" [disabled]="productoForm.invalid">Modificar</button>
+            <button type="button" class="btn btn-danger" (click)="deleteProducto()">Eliminar</button>
+        </form>
+    </div>
+</div>

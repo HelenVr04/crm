@@ -2,8 +2,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;    font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -12,16 +11,27 @@ body {
 }
 
 .container {
-    width: 90%;
+    width: 100%;
     margin: auto;
+}
+.nav {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilos del Menú */
 .menu {
     background: #07294b;
     padding: 15px;
-    text-align: center;
+    display: flex;
+    align-items: center; /* Alinea verticalmente */
+    justify-content: flex-start; /* Alinea los elementos a la izquierda */
+    gap: 15px; /* Espacio entre los elementos */
 }
+
 
 .menu a {
     color: white;
@@ -83,7 +93,7 @@ button {
 }
 
 button:hover {
-    background: #16a085;
+    background: #01024d;
 }
 
 /* Tablas */
@@ -112,7 +122,10 @@ td button {
 }
 
 td button:hover {
-    background: #2980b9;
+    background: #350b6b;
+}
+.navbar-brand {
+    margin-right: auto; /* Empuja los demás elementos hacia la derecha */
 }
 
 /* Responsividad */

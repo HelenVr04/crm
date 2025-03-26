@@ -1,0 +1,126 @@
+<div style="margin: 20px;">
+    <h1>GESTIÓN DE CLIENTES</h1>
+    <h2>Lista de Clientes</h2>
+
+    @if (clientes.length > 0) {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Fecha de cumpleaños</th>
+                    <th>Dirección</th>
+                    <th>Última compra</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (cliente of clientes; track cliente.id) {
+                    <tr>
+                        <td>{{ cliente.nombre }}</td>
+                        <td>{{ cliente.telefono }}</td>
+                        <td>{{ formatearFecha(cliente.fechaCumpleanios) }}</td>
+                        <td>
+                            {{ cliente.calle }}, 
+                            {{ cliente.ciudad }}, 
+                            {{ cliente.codigoPostal }}
+                        </td>
+                        <td>
+                            @if (cliente.fechaCompra && cliente.productoComprado) {
+                                {{ cliente.productoComprado }} - ${{ cliente.precioProducto }} - {{ formatearFecha(cliente.fechaCompra) }}
+                            } @else {
+                                <small>No hay compras registradas.</small>
+                            }
+                        </td>
+                        <td>
+                            <button class="btn btn-info" (click)="selectCliente(cliente)">Editar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    } @else {
+        <h3>No hay clientes disponibles</h3>
+    }
+
+    <div>
+        <h3>Formulario de Clientes</h3>
+        <form #clienteForm="ngForm">
+            <div>
+                <label>NOMBRE:</label>
+                <input type="text" class="form-control" [(ngModel)]="cliente.nombre" name="nombre" required minlength="7" #nombre="ngModel"/>
+                @if (nombre.invalid && nombre.touched) {
+                    <small class="text-danger">
+                        Debe registrar el nombre COMPLETO del cliente (mínimo 7 caracteres).
+                    </small>
+                }
+            </div>
+
+            <div>
+                <label>TELÉFONO:</label>
+                <input type="text" class="form-control" [(ngModel)]="cliente.telefono" name="telefono" required pattern="\d{10}" #telefono="ngModel"/>
+                @if (telefono.invalid && telefono.touched) {
+                    <small class="text-danger">
+                        El teléfono es obligatorio y debe contener 10 dígitos.
+                    </small>
+                }
+            </div>
+
+            <div>
+                <label>FECHA DE CUMPLEAÑOS:</label>
+                <input type="date" class="form-control" [(ngModel)]="cliente.fechaCumpleanios" name="fechaCumpleanios" required #fechaCumpleanios="ngModel"/>
+                @if (fechaCumpleanios.invalid && fechaCumpleanios.touched) {
+                    <small class="text-danger">
+                        La fecha de cumpleaños es obligatoria.
+                    </small>
+                }
+            </div>
+
+            <div>
+                <h4>Dirección</h4>
+                <label>Calle:</label>
+                <input type="text" class="form-control" [(ngModel)]="cliente.calle" name="calle" required #calle="ngModel"/>
+                @if (calle.invalid && calle.touched) {
+                    <small class="text-danger">Debe registrar la calle.</small>
+                }
+
+                <label>Ciudad:</label>
+                <input type="text" class="form-control" [(ngModel)]="cliente.ciudad" name="ciudad" required #ciudad="ngModel"/>
+                @if (ciudad.invalid && ciudad.touched) {
+                    <small class="text-danger">Debe registrar la ciudad.</small>
+                }
+
+                <label>Código Postal:</label>
+                <input type="text" class="form-control" [(ngModel)]="cliente.codigoPostal" name="codigoPostal" required #codigoPostal="ngModel"/>
+                @if (codigoPostal.invalid && codigoPostal.touched) {
+                    <small class="text-danger">Debe registrar el código postal.</small>
+                }
+            </div>
+
+            <div>
+                <h4>Última compra</h4>
+                <label>Producto comprado:</label>
+                <input type="text" class="form-control" [(ngModel)]="cliente.productoComprado" name="productoComprado" required #productoComprado="ngModel"/>
+                @if (productoComprado.invalid && productoComprado.touched) {
+                    <small class="text-danger">Debe registrar un producto.</small>
+                }
+
+                <label>Precio del producto:</label>
+                <input type="number" class="form-control" [(ngModel)]="cliente.precioProducto" name="precioProducto" required #precioProducto="ngModel"/>
+                @if (precioProducto.invalid && precioProducto.touched) {
+                    <small class="text-danger">Debe registrar el precio.</small>
+                }
+
+                <label>Fecha de compra:</label>
+                <input type="date" class="form-control" [(ngModel)]="cliente.fechaCompra" name="fechaCompra" required #fechaCompra="ngModel"/>
+                @if (fechaCompra.invalid && fechaCompra.touched) {
+                    <small class="text-danger">Debe registrar la fecha de compra.</small>
+                }
+            </div>
+
+            <button type="button" class="btn btn-primary" (click)="insertarCliente()" [disabled]="clienteForm.invalid">Agregar</button>
+            <button type="button" class="btn btn-warning" (click)="updateCliente()" [disabled]="clienteForm.invalid">Modificar</button>
+            <button type="button" class="btn btn-danger" (click)="deleteCliente()">Eliminar</button>
+        </form>
+    </div>
+</div>
