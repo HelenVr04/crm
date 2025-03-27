@@ -1,206 +1,238 @@
-/* Estilo general de la página */
+/* Estilos Generales */
 body {
-    background-color: #f7f1f9; /* Fondo suave pastel */
-    font-family: 'Poppins', sans-serif;
-    color: #444;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+    border-bottom: 2px solid #001f3f; /* Azul marino */
+    padding-bottom: 10px;
+}
+
+h2, h3, h4 {
+    color: #34495e;
+    margin: 15px 0;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+    margin-top: 20px;
 }
 
 /* Contenedor principal */
-.container {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: 2px solid #e0c3fc; /* Borde aesthetic */
+div[margin="20px"] {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo del encabezado */
-h1, h2 {
-    color: #000; /* Negro */
-    text-align: center;
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 20px;  
-}
-
-/* Tabla */
-table {
+/* Tabla de productos - Estilo mejorado */
+.table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    border-radius: 10px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 25px 0;
+    font-size: 0.9em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    background-color: white;
+    border-radius: 6px;
     overflow: hidden;
 }
 
-thead {
-    background-color: #c1a1d3; /* Morado pastel */
+.table thead tr {
+    background-color: #001f3f; /* Azul marino */
     color: white;
 }
 
-th, td {
-    padding: 12px;
-    text-align: center;
-    border: 1px solid #dcdcdc; 
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9; 
-}
-
-tr:hover {
-    background: #f5ebff;
-}
-
-/* Botones */
-button {
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
+.table th {
+    padding: 12px 15px;
+    text-align: left;
     font-weight: 600;
-    color: black;
+    border-right: 1px solid rgba(255,255,255,0.1);
 }
 
-.btn-info {
-    background-color: #a278ff;
+.table th:last-child {
+    border-right: none;
 }
 
-.btn-info:hover {
-    background-color: #7a4cff;
+.table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
 }
 
-.btn-danger {
-    background-color: #ff6b6b;
+.table td:last-child {
+    border-right: none;
 }
 
-.btn-danger:hover {
-    background-color: #ff4040;
+.table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
 }
 
-.btn-primary {
-    background-color: #a278ff;
+.table tbody tr:last-of-type {
+    border-bottom: 2px solid #001f3f; /* Azul marino */
 }
 
-.btn-primary:hover {
-    background-color: #7a4cff;
+.table tbody tr:hover {
+    background-color: rgba(178, 34, 34, 0.1); /* Rojo mate con transparencia */
 }
 
-.btn-success {
-    background-color: #78c2ad;
-}
-
-.btn-success:hover {
-    background-color: #4da891;
-}
-
-button:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
+/* Mensaje sin productos */
+h3.text-muted {
+    color: #7f8c8d;
+    text-align: center;
+    margin: 40px 0;
+    font-style: italic;
 }
 
 /* Formulario */
-.form-label {
-    color: #5a3e85;
-    font-weight: 500;
+form {
+    margin-top: 30px;
+    background: #f9f9f9;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: 600;
+    color: #2c3e50;
 }
 
 .form-control {
-    border-radius: 10px;
-    border: 1.5px solid #d8b6ff;
+    width: 100%;
     padding: 10px;
-    background-color: #fefaff;
-    color: #333;
-    outline: none;
-    transition: 0.3s;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 16px;
 }
 
 .form-control:focus {
-    border-color: #a675ff;
-    box-shadow: 0 0 5px #d5a3ff;
+    border-color: #001f3f; /* Azul marino */
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 31, 63, 0.3); /* Azul marino con transparencia */
 }
 
 /* Mensajes de error */
 .text-danger {
-    color: #ff6b6b;
-    font-size: 12px;
+    color: #b22222; /* Rojo mate */
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    display: block;
 }
 
-/* Espaciado para los formularios */
-.mb-3 {
-    margin-bottom: 20px;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-}
-
-th {
-    background: #c1a1d3; /* Morado pastel */
-    color: white;
-    font-weight: 600;
-}
-
-tr {
-    transition: background 0.3s ease-in-out;
-}
-
-tr:hover {
-    background: #f5ebff;
-}
-/* Botones aesthetic con efecto hover */
-button {
-    padding: 10px 15px;
+/* Botones */
+.btn {
+    padding: 10px 20px;
     border: none;
-    border-radius: 8px;
-    color: black; /* Negro */
-    font-weight: 500;
+    border-radius: 4px;
     cursor: pointer;
-    transition: 0.3s ease-in-out;
+    font-size: 16px;
+    margin-right: 10px;
+    margin-top: 15px;
+    transition: all 0.3s ease;
 }
 
 .btn-primary {
-    background: #a278ff;
+    background-color: #001f3f; /* Azul marino */
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #003366; /* Azul marino más oscuro */
 }
 
 .btn-warning {
-    background: #ffb677;
-}
-
-.btn-danger {
-    background: #ff6b6b;
-}
-
-.btn-success {
-    background: #78c2ad;
-}
-
-/* Efecto hover en los botones */
-.btn-primary:hover {
-    background: #7a4cff; /* Morado más intenso */
+    background-color: #b22222; /* Rojo mate */
+    color: white;
 }
 
 .btn-warning:hover {
-    background: #ff9e4d; /* Naranja más fuerte */
+    background-color: #8b1a1a; /* Rojo mate más oscuro */
+}
+
+.btn-danger {
+    background-color: #b22222; /* Rojo mate */
+    color: white;
 }
 
 .btn-danger:hover {
-    background: #ff4040; /* Rojo más vibrante */
+    background-color: #8b1a1a; /* Rojo mate más oscuro */
 }
 
-.btn-success:hover {
-    background: #4da891; /* Verde más profundo */
+.btn-info {
+    background-color: #001f3f; /* Azul marino */
+    color: white;
+    padding: 6px 12px;
+    font-size: 14px;
 }
 
-button:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
+.btn-info:hover {
+    background-color: #003366; /* Azul marino más oscuro */
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
+    
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+    
+    .table tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+    }
+    
+    .table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border-bottom: none;
+        border-right: none;
+    }
+    
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        padding-right: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+    
+    .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }

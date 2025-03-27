@@ -10,4 +10,5 @@ import { MenuComponent } from './pages/menu/menu.component';
 })
 export class AppComponent {
   title = 'crm';
+ 
 }

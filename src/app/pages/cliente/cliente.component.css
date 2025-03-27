@@ -11,7 +11,7 @@ h1 {
     color: #2c3e50;
     margin-bottom: 20px;
     font-size: 2.2rem;
-    border-bottom: 2px solid #1abc9c;
+    border-bottom: 2px solid #001f3f; /* Cambiado a azul marino */
     padding-bottom: 10px;
 }
 
@@ -53,7 +53,7 @@ div[margin="20px"] {
 }
 
 .table thead tr {
-    background-color: #1abc9c;
+    background-color: #001f3f; /* Azul marino */
     color: white;
     text-align: left;
 }
@@ -73,11 +73,11 @@ div[margin="20px"] {
 }
 
 .table tbody tr:last-of-type {
-    border-bottom: 2px solid #1abc9c;
+    border-bottom: 2px solid #001f3f; /* Azul marino */
 }
 
 .table tbody tr:hover {
-    background-color: #e8f4f1;
+    background-color: rgba(178, 34, 34, 0.1); /* Rojo mate con transparencia */
 }
 
 /* Estilos para el mensaje "No hay clientes" */
@@ -114,14 +114,14 @@ label {
 }
 
 .form-control:focus {
-    border-color: #1abc9c;
+    border-color: #001f3f; /* Azul marino */
     outline: none;
-    box-shadow: 0 0 5px rgba(26, 188, 156, 0.3);
+    box-shadow: 0 0 5px rgba(0, 31, 63, 0.3); /* Azul marino con transparencia */
 }
 
 /* Mensajes de error */
 .text-danger {
-    color: #e74c3c;
+    color: #b22222; /* Rojo mate */
     font-size: 0.85rem;
     margin-bottom: 15px;
     display: block;
@@ -140,41 +140,41 @@ label {
 }
 
 .btn-primary {
-    background-color: #3498db;
+    background-color: #001f3f; /* Azul marino */
     color: white;
 }
 
 .btn-primary:hover {
-    background-color: #2980b9;
+    background-color: #003366; /* Azul marino más oscuro */
 }
 
 .btn-warning {
-    background-color: #f39c12;
+    background-color: #b22222; /* Rojo mate */
     color: white;
 }
 
 .btn-warning:hover {
-    background-color: #d35400;
+    background-color: #8b1a1a; /* Rojo mate más oscuro */
 }
 
 .btn-danger {
-    background-color: #e74c3c;
+    background-color: #b22222; /* Rojo mate */
     color: white;
 }
 
 .btn-danger:hover {
-    background-color: #c0392b;
+    background-color: #8b1a1a; /* Rojo mate más oscuro */
 }
 
 .btn-info {
-    background-color: #1abc9c;
+    background-color: #001f3f; /* Azul marino */
     color: white;
     padding: 6px 12px;
     font-size: 14px;
 }
 
 .btn-info:hover {
-    background-color: #16a085;
+    background-color: #003366; /* Azul marino más oscuro */
 }
 
 .btn:disabled {
