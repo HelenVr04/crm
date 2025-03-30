@@ -32,6 +32,7 @@ export class PedidoComponent {
     this.getClientes();
     this.getProductos();
     this.getPedidos();
+    this.pedido.productos = []; 
   }
 
   // Obtener los clientes
@@ -101,26 +102,31 @@ export class PedidoComponent {
   }
 
   // Añadir productos al pedido
-// Añadir productos al pedido
-// Añadir productos al pedido
-addProducto() {
-  if (this.productoSeleccionado && this.cantidadSeleccionada <= this.productoSeleccionado.stock) {
-    const productoExistente = this.pedido.productos.find(
-      (p) => p.productoId === this.productoSeleccionado?.id
-    );
+  addProducto() {
+    if (this.productoSeleccionado && this.cantidadSeleccionada <= this.productoSeleccionado.stock) {
+        const productoExistente = this.pedido.productos.find(
+            (p) => p.productoId === this.productoSeleccionado?.id
+        );
 
-    if (productoExistente) {
-      // Si ya existe el producto en el pedido, solo actualiza la cantidad
-      productoExistente.cantidad += this.cantidadSeleccionada;
-    } else {
-      alert("Este producto no existe")
+        if (productoExistente) {
+            // Si ya existe el producto en el pedido, solo actualiza la cantidad
+            productoExistente.cantidad += this.cantidadSeleccionada;
+        } else {
+            // Si el producto no existe, lo agrega al pedido
+            this.pedido.productos.push({
+                productoId: this.productoSeleccionado.id,
+                nombre: this.productoSeleccionado.nombre,
+                costo: this.productoSeleccionado.costo,
+                cantidad: this.cantidadSeleccionada
+            });
+        }
+
+        this.calcularTotalCosto();
+        // Reiniciar la cantidad seleccionada para el siguiente producto
+        this.cantidadSeleccionada = 1;
     }
-
-    this.calcularTotalCosto();
-    // Reiniciar la cantidad seleccionada para el siguiente producto
-    this.cantidadSeleccionada = 1;
-  }
 }
+
 
 // Validar la cantidad ingresada
 validarCantidad() {

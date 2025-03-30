@@ -84,6 +84,17 @@
                     }
                 }
             </div>
+            <div>
+                <h4>Productos seleccionados</h4>
+                <ul>
+                    @for (producto of pedido.productos; track producto) {
+                        <li>
+                            {{ producto.nombre }} - ${{ producto.costo }} x {{ producto.cantidad }}
+                        </li>
+                    }
+                </ul>
+            </div>
+            
 
             <div>
                 <label>Fecha del Pedido:</label>

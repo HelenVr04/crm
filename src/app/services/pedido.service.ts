@@ -23,7 +23,7 @@ export class PedidoService {
     const pedidoData = {
       clienteId: pedido.clienteId,
       fechaPedido: pedido.fechaPedido,
-      productos: pedido.productos,  // Mapa de productos ya estructurado
+      productos: pedido.productos,  
       totalCosto: pedido.totalCosto
     };
     return addDoc(pedidosCollection, pedidoData);
