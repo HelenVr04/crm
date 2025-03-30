@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Cliente } from '../models/cliente.model';
 import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, updateDoc } from '@angular/fire/firestore';
-import { first } from 'rxjs';
+import { Observable  } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class ClienteService {
   // Obtener clientes
   getClientes() {
     const clientesCollection = collection(this.db, 'clientes');
-    return collectionData(clientesCollection, { idField: 'id' }).pipe(first());
+    return collectionData(clientesCollection, { idField: 'id' }) as Observable<Cliente[]>;
   }
 
   // Agregar cliente

@@ -15,6 +15,7 @@ export class ProductoService {
   getProductos() {
     const productosCollection = collection(this.db, 'productos');
     return collectionData(productosCollection, { idField: 'id' }).pipe(first());
+    console.log('Productos obtenidos:', productosCollection);
   }
 
   // Agregar producto

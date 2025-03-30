@@ -1,0 +1,103 @@
+<div style="margin: 20px;">
+    <h1>GESTIÓN DE PEDIDOS</h1>
+    <h2>Lista de Pedidos</h2>
+
+    @if (pedidos.length > 0) {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Productos</th>
+                    <th>Total Costo</th>
+                    <th>Fecha del Pedido</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (pedido of pedidos; track pedido.id) {
+                    <tr>
+                        <td>{{ pedido.clienteId }}</td>
+                        <td>
+                            <ul>
+                                @for (producto of pedido.productos; track producto.id) {
+                                    <li>{{ producto.nombre }} - ${{ producto.costo }} x {{ producto.cantidad }}</li>
+                                }
+                            </ul>
+                        </td>
+                        <td>${{ pedido.totalCosto }}</td>
+                        <td>{{ pedido.fechaPedido }}</td>
+                        <td>
+                            <button class="btn btn-info" (click)="selectPedido(pedido)">Editar</button>
+                            <button class="btn btn-danger" (click)="deletePedido()">Eliminar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    } @else {
+        <h3>No hay pedidos disponibles</h3>
+    }
+
+    <div>
+        <h3>Formulario de Pedido</h3>
+        <form #pedidoForm="ngForm">
+            <div>
+                <label>Cliente:</label>
+                <select class="form-control" [(ngModel)]="pedido.clienteId" name="clienteId" required #clienteId="ngModel">
+                    @for (cliente of clientes; track cliente.id) {
+                        <option [value]="cliente.id">{{ cliente.nombre }}</option>
+                    }
+                </select>
+                @if (clienteId.invalid && clienteId.touched) {
+                    <div class="text-danger">Debes seleccionar un cliente.</div>
+                }
+            </div>
+
+            <div>
+                <h4>Productos</h4>
+                @if (productos.length > 0) {
+                    <div>
+                        <label for="productoSelect">Selecciona un producto:</label>
+                        <select [(ngModel)]="productoSeleccionado" name="productoSeleccionado" (change)="updatePrecio()" class="form-control" required>
+                            @for (producto of productos; track producto.id) {
+                                <option [ngValue]="producto">{{ producto.nombre }}</option>
+                            }
+                        </select>
+                    </div>
+                    @if (productoSeleccionado) {
+                        <div>
+                            <label>Precio:</label>
+                            <input type="text" [value]="productoSeleccionado.costo" class="form-control" readonly />
+                        </div>
+                        <div>
+                            <label>Cantidad:</label>
+                            <input type="number" [(ngModel)]="cantidadSeleccionada" name="cantidadSeleccionada" class="form-control" min="1" [max]="productoSeleccionado.stock" (change)="validarCantidad()" required />
+                            @if (cantidadSeleccionada > productoSeleccionado.stock) {
+                                <small class="text-danger">
+                                    La cantidad no puede superar el stock disponible: {{ productoSeleccionado.stock }}
+                                </small>
+                            }
+                        </div>
+                        <button type="button" class="btn btn-success" (click)="addProducto()" [disabled]="cantidadSeleccionada > productoSeleccionado.stock">
+                            Agregar al Pedido
+                        </button>
+                    }
+                }
+            </div>
+
+            <div>
+                <label>Fecha del Pedido:</label>
+                <input type="date" class="form-control" [(ngModel)]="pedido.fechaPedido" name="fechaPedido" required #fechaPedido="ngModel"/>
+                @if (fechaPedido.invalid && fechaPedido.touched) {
+                    <div class="text-danger">La fecha del pedido es obligatoria.</div>
+                }
+            </div>
+
+            <div class="mt-3">
+                <button type="button" class="btn btn-primary" (click)="insertarPedido()" [disabled]="pedidoForm.invalid && !pedido.id">Agregar Pedido</button>
+                <button type="button" class="btn btn-warning" (click)="updatePedido()" [disabled]="pedidoForm.invalid || !pedido.id">Modificar Pedido</button>
+                <button type="button" class="btn btn-danger" (click)="deletePedido()" [disabled]="!pedido.id">Eliminar Pedido</button>
+            </div>
+        </form>
+    </div>
+</div>

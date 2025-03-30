@@ -19,7 +19,7 @@
                     <tr>
                         <td>{{ cliente.nombre }}</td>
                         <td>{{ cliente.telefono }}</td>
-                        <td>{{ formatearFecha(cliente.fechaCumpleanios) }}</td>
+                        <td>{{ cliente.fechaCumpleanios }}</td>
                         <td>
                             {{ cliente.calle }}, 
                             {{ cliente.ciudad }}, 
@@ -27,7 +27,7 @@
                         </td>
                         <td>
                             @if (cliente.fechaCompra && cliente.productoComprado) {
-                                {{ cliente.productoComprado }} - ${{ cliente.precioProducto }} - {{ formatearFecha(cliente.fechaCompra) }}
+                                {{ cliente.productoComprado }} - ${{ cliente.precioProducto }} - {{ cliente.fechaCompra}}
                             } @else {
                                 <small>No hay compras registradas.</small>
                             }
