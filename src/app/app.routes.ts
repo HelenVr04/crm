@@ -4,6 +4,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ClienteComponent } from './pages/cliente/cliente.component';
 import { ProductoComponent } from './pages/producto/producto.component';
 import { PedidoComponent } from './pages/pedido/pedido.component';
+import { ProveedorComponent } from './pages/proveedor/proveedor.component';
 
 export const routes: Routes = [
     {
@@ -21,6 +22,10 @@ export const routes: Routes = [
     {
         path: 'pedidos',
         component: PedidoComponent
+    },
+    {
+        path:'proveedores',
+        component: ProveedorComponent
     },
     {
         path:'about',

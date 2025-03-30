@@ -12,17 +12,17 @@ body {
 }
 
 .container {
+    display: flex; /* Cambiado para que el contenido y el menú se alineen correctamente */
     width: 100%;
-    margin: 0;
 }
 
-/* Estilos del Menú Vertical */
+/* Cambiar el menú de fixed a relative */
 .menu {
     background: #07294b;
-    position: fixed;
+    position:fixed; /* Cambiado de fixed a relative */
     left: 0;
     top: 0;
-    width: 70px; /* Inicialmente colapsado */
+    width: 70px;
     height: 100vh;
     padding: 20px 0;
     display: flex;
@@ -33,6 +33,23 @@ body {
     overflow: hidden;
 }
 
+/* Ajustar el contenido para que el menú no lo tape */
+.container {
+    display: relative;
+    width: 100%;
+}
+
+.content {
+    background: white;
+    margin: 20px;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: margin-left 0.3s ease;
+    flex: 1; /* Para que el contenido ocupe el resto del espacio */
+}
+
+
 /* Expandir al hacer hover */
 .menu:hover {
     width: 250px;
@@ -40,7 +57,7 @@ body {
 
 /* Ajustar contenido cuando el menú se expande */
 .menu:hover + .content {
-    margin-left: 250px;
+    margin-left: 250px; /* Asegúrate de que el contenido se desplace correctamente */
 }
 
 /* Logo/Brand */
@@ -107,7 +124,7 @@ body {
 /* Contenedor de las secciones */
 .content {
     background: white;
-    margin: 20px 20px 20px 90px;
+    margin: 20px 20px 20px 90px; /* Ajusta el margen izquierdo para que no se superponga */
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -125,10 +142,10 @@ body {
     }
     
     .menu:hover + .content {
-        margin-left: 90px;
+        margin-left: 90px; /* Ajusta el margen para pantallas pequeñas */
     }
     
     .content {
-        margin-left: 90px;
+        margin-left: 90px; /* Asegúrate de que el contenido no se superponga */
     }
 }
