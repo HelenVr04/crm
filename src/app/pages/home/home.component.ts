@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-home',
@@ -7,5 +10,20 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+
+  authService: AuthService = inject(AuthService);
+  router : Router = inject(Router);
+
+  //metodo para salir o cerrar sesión
+  salir(){
+    this.authService.logout().subscribe({
+      next: () => {
+        this.router.navigateByUrl('');
+      },
+      error: (error) => {
+        console.error('Error', error);
+      }
+    });
+  }
 
 }

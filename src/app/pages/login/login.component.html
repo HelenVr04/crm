@@ -1,0 +1,27 @@
+<div style="margin: 20px">
+    <h1>Iniciar sesión</h1>
+
+    <div class="col-sm-4">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>E-Mail:</label>
+                <input type="email" class="form-control" formControlName="email" />
+                @if(form.get('email')?.touched && form.get('email')?.errors){
+                    <div style="color: red;">Error de validación</div>
+                }
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" class="form-control" formControlName="password" />
+                @if(form.get('password')?.touched && form.get('password')?.errors || this.error){
+                    <div style="color: red;">Error de validación</div>
+                }
+            </div>
+            <p></p>
+            <div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+
+    </div>
+</div>
