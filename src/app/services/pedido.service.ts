@@ -22,6 +22,7 @@ export class PedidoService {
     const pedidosCollection = collection(this.db, 'pedidos');
     const pedidoData = {
       clienteId: pedido.clienteId,
+      clienteNombre: pedido.clienteNombre,
       fechaPedido: pedido.fechaPedido,
       productos: pedido.productos,  
       totalCosto: pedido.totalCosto
@@ -34,6 +35,7 @@ export class PedidoService {
     const documentRef = doc(this.db, 'pedidos', pedido.id);
     return updateDoc(documentRef, {
       clienteId: pedido.clienteId,
+      clienteNombre: pedido.clienteNombre,
       fechaPedido: pedido.fechaPedido,
       productos: pedido.productos,
       totalCosto: pedido.totalCosto

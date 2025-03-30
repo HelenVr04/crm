@@ -51,15 +51,21 @@ export class PedidoComponent {
   // Obtener los pedidos
   async getPedidos(): Promise<void> {
     this.pedidos = await firstValueFrom(this.pedidoService.getPedidos());
-  }
-
+    console.log(this.pedidos); // Verifica qué datos se están recuperando
+}
   // Insertar un nuevo pedido
   async insertarPedido() {
     if (!this.validarPedido()) return;
+
+    // Obtener el cliente seleccionado para establecer el nombre
+    const clienteSeleccionado = this.clientes.find(cliente => cliente.id === this.pedido.clienteId);
+    if (clienteSeleccionado) {
+        this.pedido.clienteNombre = clienteSeleccionado.nombre; // Asignar el nombre del cliente
+    }
     await this.pedidoService.agregarPedido(this.pedido);
     this.getPedidos();
     this.pedido = new Pedido();
-  }
+}
 
   // Seleccionar un pedido
   selectPedido(pedidoSeleccionado: Pedido) {
@@ -102,29 +108,33 @@ export class PedidoComponent {
   }
 
   // Añadir productos al pedido
-  addProducto() {
-    if (this.productoSeleccionado && this.cantidadSeleccionada <= this.productoSeleccionado.stock) {
-        const productoExistente = this.pedido.productos.find(
-            (p) => p.productoId === this.productoSeleccionado?.id
-        );
-
-        if (productoExistente) {
-            // Si ya existe el producto en el pedido, solo actualiza la cantidad
-            productoExistente.cantidad += this.cantidadSeleccionada;
-        } else {
-            // Si el producto no existe, lo agrega al pedido
-            this.pedido.productos.push({
-                productoId: this.productoSeleccionado.id,
-                nombre: this.productoSeleccionado.nombre,
-                costo: this.productoSeleccionado.costo,
-                cantidad: this.cantidadSeleccionada
-            });
-        }
-
-        this.calcularTotalCosto();
-        // Reiniciar la cantidad seleccionada para el siguiente producto
-        this.cantidadSeleccionada = 1;
+async addProducto() {
+  if (this.productoSeleccionado && this.cantidadSeleccionada <= this.productoSeleccionado.stock) {
+    const productoExistente = this.pedido.productos.find(
+        (p) => p.productoId === this.productoSeleccionado?.id
+    );
+    if (productoExistente) {
+        // Si ya existe el producto en el pedido, solo actualiza la cantidad
+        productoExistente.cantidad += this.cantidadSeleccionada;
+    } else {
+        // Si el producto no existe, lo agrega al pedido
+        this.pedido.productos.push({
+            productoId: this.productoSeleccionado.id,
+            nombre: this.productoSeleccionado.nombre,
+            costo: this.productoSeleccionado.costo,
+            cantidad: this.cantidadSeleccionada
+        });
     }
+
+    // Actualizamos el stock después de agregar el producto
+    await this.productoService.actualizarStock(this.productoSeleccionado.id, this.cantidadSeleccionada);
+
+    this.calcularTotalCosto();
+    // Reiniciar la cantidad seleccionada para el siguiente producto
+    this.cantidadSeleccionada = 1;
+  } else {
+    alert("No hay suficiente stock para este producto");
+  }
 }
 
 
@@ -142,14 +152,6 @@ updateCosto() {
     this.productoSeleccionado.costo = this.productoSeleccionado.costo;
   }
 }
-
-
-updatePrecio() {
-  if (this.productoSeleccionado) {
-    this.productoSeleccionado.costo = this.productoSeleccionado.costo;
-  }
-}
-
   // Calcular el costo total del pedido
   calcularTotalCosto() {
     this.pedido.totalCosto = this.pedido.productos.reduce((total, producto) => {

@@ -11,7 +11,7 @@
                     <th>Stock</th>
                     <th>Proveedor</th>
                     <th>Costo</th>
-                    <th>Acciones</th>
+                    <th>Seleccionar</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,7 +23,7 @@
                         <td>{{ producto.proveedor }}</td>
                         <td>${{ producto.costo }}</td>
                         <td>
-                            <button class="btn btn-info" (click)="selectProducto(producto)">Editar</button>
+                            <button class="btn btn-info" (click)="selectProducto(producto)">Seleccionar</button>
                         </td>
                     </tr>
                 }

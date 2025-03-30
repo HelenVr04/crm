@@ -16,7 +16,7 @@
             <tbody>
                 @for (pedido of pedidos; track pedido.id) {
                     <tr>
-                        <td>{{ pedido.clienteId }}</td>
+                        <td>{{ pedido.clienteNombre }}</td>
                         <td>
                             <ul>
                                 @for (producto of pedido.productos; track producto.id) {
@@ -27,8 +27,7 @@
                         <td>${{ pedido.totalCosto }}</td>
                         <td>{{ pedido.fechaPedido }}</td>
                         <td>
-                            <button class="btn btn-info" (click)="selectPedido(pedido)">Editar</button>
-                            <button class="btn btn-danger" (click)="deletePedido()">Eliminar</button>
+                            <button class="btn btn-info" (click)="selectPedido(pedido)">Seleccionar</button>
                         </td>
                     </tr>
                 }
@@ -58,7 +57,7 @@
                 @if (productos.length > 0) {
                     <div>
                         <label for="productoSelect">Selecciona un producto:</label>
-                        <select [(ngModel)]="productoSeleccionado" name="productoSeleccionado" (change)="updatePrecio()" class="form-control" required>
+                        <select [(ngModel)]="productoSeleccionado" name="productoSeleccionado" (change)="updateCosto()" class="form-control" required>
                             @for (producto of productos; track producto.id) {
                                 <option [ngValue]="producto">{{ producto.nombre }}</option>
                             }
@@ -94,7 +93,6 @@
                     }
                 </ul>
             </div>
-            
 
             <div>
                 <label>Fecha del Pedido:</label>
