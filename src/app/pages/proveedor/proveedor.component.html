@@ -1,1 +1,92 @@
-<p>proveedor works!</p>
+<div style="margin: 20px;">
+    <h1>GESTIÓN DE PROVEEDORES</h1>
+    <h2>Lista de Proveedores</h2>
+
+    @if (proveedores.length > 0){
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Dirección</th>
+                    <th>Seleccionar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (proveedor of proveedores; track proveedor.id){
+                    <tr>
+                        <td>{{ proveedor.nombre }}</td>
+                        <td>{{ proveedor.telefono }}</td>
+                        <td>{{ proveedor.fechaCumpleanios }}</td>
+                        <td>
+                            {{ proveedor.calle }},
+                            {{ proveedor.ciudad }},
+                            {{ proveedor.codigoPostal }}
+                        </td>
+                        <td>
+                            <button class="btn btn-info" (click)="selectProveedor(proveedor)">Seleccionar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }@else{
+        <h3>No hay proveedores disponibles</h3>
+    }
+
+    <div>
+        <h3>Formulario de Proveedores</h3>
+        <form #proveedorForm="ngForm">
+            <div>
+                <label>NOMBRE:</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.nombre" name="nombre" required minlength="7" #nombre="ngModel"/>
+                @if(nombre.invalid && nombre.touched){
+                    <small class="text-danger">El nombre debe tener al menos 7 caracteres.</small>
+                }
+            </div>
+
+            <div>
+                <label>TELÉFONO:</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.telefono" name="telefono" required pattern="\d{10}" #telefono="ngModel"/>
+                @if (telefono.invalid && telefono.touched) {
+                    <small class="text-danger">
+                        El teléfono es obligatorio y debe contener 10 dígitos.
+                    </small>
+                }
+            </div>
+            <div>
+                <label>FECHA DE NACIMIENTO:</label>
+                <input type="date" class="form-control" [(ngModel)]="proveedor.fechaCumpleanios" name="fechaCumpleanios" required #fechaCumpleanios="ngModel"/>
+                @if (fechaCumpleanios.invalid && fechaCumpleanios.touched) {
+                    <small class="text-danger">
+                        La fecha de cumpleaños es obligatoria.
+                    </small>
+                }
+            </div>
+
+            <div>
+                <h4>Dirección</h4>
+                <label>Calle:</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.calle" name="calle" required #calle="ngModel"/>
+                @if (calle.invalid && calle.touched) {
+                    <small class="text-danger">Debe registrar la calle.</small>
+                }
+
+                <label>Ciudad:</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.ciudad" name="ciudad" required #ciudad="ngModel"/>
+                @if (ciudad.invalid && ciudad.touched) {
+                    <small class="text-danger">Debe registrar la ciudad.</small>
+                }
+                <label>Código Postal:</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.codigoPostal" name="codigoPostal" required pattern="\d{5}" #codigoPostal="ngModel"/>
+                @if (codigoPostal.invalid && codigoPostal.touched) {
+                    <small class="text-danger">Debe registrar el código postal.</small>
+                }
+            </div>
+            <button type="button" class="btn btn-primary" (click)="insertarProveedor()" [disabled]="proveedorForm.invalid">Agregar</button>
+            <button type="button" class="btn btn-warning" (click)="updateProveedor()" [disabled]="proveedorForm.invalid">Modificar</button>
+            <button type="button" class="btn btn-danger" (click)="deleteProveedor()">Eliminar</button>
+        </form>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-export class Cliente {
+export class Proveedor {
     id!: string; 
     nombre!: string;
     telefono!: string;
@@ -6,8 +6,5 @@ export class Cliente {
     calle!: string;
     ciudad!: string;
     codigoPostal!: string;
-    fechaCompra!: string;
-    productoComprado!: string;
-    precioProducto!: number;
   }
   

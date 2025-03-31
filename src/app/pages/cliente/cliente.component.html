@@ -8,7 +8,7 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Teléfono</th>
-                    <th>Fecha de cumpleaños</th>
+                    <th>Fecha de nacimiento</th>
                     <th>Dirección</th>
                     <th>Última compra</th>
                     <th>Seleccionar</th>
@@ -67,7 +67,7 @@
             </div>
 
             <div>
-                <label>FECHA DE NACIEMIENTO:</label>
+                <label>FECHA DE NACIMIENTO:</label>
                 <input type="date" class="form-control" [(ngModel)]="cliente.fechaCumpleanios" name="fechaCumpleanios" required #fechaCumpleanios="ngModel"/>
                 @if (fechaCumpleanios.invalid && fechaCumpleanios.touched) {
                     <small class="text-danger">
