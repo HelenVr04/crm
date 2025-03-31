@@ -26,7 +26,7 @@ export class ProductoService {
       stock: producto.stock,
       proveedor: producto.proveedor,
       costo: producto.costo,
-      alertaBaja: producto.alertaBaja ?? 5 // Si es undefined, se asigna 5
+      alertaBaja: producto.alertaBaja ?? 10 
     };
     return addDoc(productosCollection, productoData);
   }

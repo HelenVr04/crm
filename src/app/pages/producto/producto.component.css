@@ -236,3 +236,33 @@ label {
         margin-bottom: 10px;
     }
 }
+  
+.notificaciones {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .notificacion {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .notificacion button {
+    background: none;
+    border: none;
+    color: #721c24;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  

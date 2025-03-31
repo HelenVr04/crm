@@ -1,12 +1,19 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-    <div class="container">
-        <h1>HOME</h1>
+@if (productosStockBajo.length >0) {
+<div class="stock-bajo-container">
+    <h2>Productos con Stock Bajo</h2>
+    <div class="card">
+        @for (producto of productosStockBajo; track producto) {
+            <h3>{{ producto.nombre }}</h3>
+            <p>Categoría: {{ producto.categoria }}</p>
+            <p><strong>Stock: {{ producto.stock }}</strong></p>
+            <p>Proveedor: {{ producto.proveedor }}</p>
+            <p>Costo: ${{ producto.costo }}</p>
+        }
     </div>
-</body>
-</html>
+   
+  </div>
+}@else {
+    <div class="no-stock-bajo">
+        <h3>No hay productos con stock bajo en este momento.</h3>
+    </div>
+}

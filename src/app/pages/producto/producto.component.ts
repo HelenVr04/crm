@@ -14,18 +14,35 @@ export class ProductoComponent {
   productos: any;
   producto: Producto = new Producto();
   categorias: string[] = ['Vidrios', 'Aluminios', 'Accesorios'];
+  notificaciones: Producto[] = [];
 
   constructor(private productoService: ProductoService) {
     this.getProductos();
   }
-  async getProductos(): Promise<void>{
-    this.productos = await firstValueFrom(this.productoService.getProductos());
+  async getProductos(): Promise<void> {
+    try {
+      const productosData = await firstValueFrom(this.productoService.getProductos());
+      this.productos = productosData || []; // Asegurarnos de que sea un array
+      this.checkStockBajo(); // Verificar los productos con stock bajo
+    } catch (error) {
+      console.error("Error al obtener productos:", error);
+      this.productos = [];
+    }
   }
-
-
+  checkStockBajo(): void {
+    if (!Array.isArray(this.productos)) {
+      this.notificaciones = [];
+      return;
+    }
+    this.notificaciones = this.productos.filter((producto: Producto) => {
+      return producto.stock <= producto.alertaBaja;
+    });
+  }
+  
+  
   async insertarProducto() {
     if (!this.validarProducto()) return;
-    this.producto.alertaBaja = this.producto.alertaBaja ?? 5; // 👈 Se asigna 5 si es undefined
+    this.producto.alertaBaja = this.producto.alertaBaja ?? 10; 
     await this.productoService.agregarProducto(this.producto);
     this.getProductos();
     this.producto = new Producto();

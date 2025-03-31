@@ -19,7 +19,7 @@ body {
 /* Cambiar el menú de fixed a relative */
 .menu {
     background: #07294b;
-    position:fixed; /* Cambiado de fixed a relative */
+    position:fixed; 
     left: 0;
     top: 0;
     width: 70px;
