@@ -1,6 +1,8 @@
+@if (!(isAuthenticated$ | async)) {
+  <router-outlet></router-outlet>
+} @else {
   <app-menu></app-menu>
-  <!-- Contenido dinámico que cambiará con el routing -->
-  <div class="content">
+  <div class="main-content">
     <router-outlet></router-outlet>
   </div>
-  
+}
