@@ -11,7 +11,7 @@ h1 {
     color: #2c3e50;
     margin-bottom: 20px;
     font-size: 2.2rem;
-    border-bottom: 2px solid #001f3f; /* Azul marino */
+    border-bottom: 2px solid #001f3f; /* Cambiado a azul marino */
     padding-bottom: 10px;
 }
 
@@ -43,43 +43,29 @@ div[margin="20px"] {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Tabla de productos - Estilo mejorado */
+/* Tabla de clientes */
 .table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
+    border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    background-color: white;
-    border-radius: 6px;
-    overflow: hidden;
 }
 
 .table thead tr {
     background-color: #001f3f; /* Azul marino */
     color: white;
-}
-
-.table th {
-    padding: 12px 15px;
     text-align: left;
-    font-weight: 600;
-    border-right: 1px solid rgba(255,255,255,0.1);
 }
 
-.table th:last-child {
-    border-right: none;
-}
-
+.table th,
 .table td {
     padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+    border: 1px solid #ddd;
 }
 
-.table td:last-child {
-    border-right: none;
+.table tbody tr {
+    border-bottom: 1px solid #dddddd;
 }
 
 .table tbody tr:nth-of-type(even) {
@@ -94,7 +80,7 @@ div[margin="20px"] {
     background-color: rgba(178, 34, 34, 0.1); /* Rojo mate con transparencia */
 }
 
-/* Mensaje sin productos */
+/* Estilos para el mensaje "No hay clientes" */
 h3.text-muted {
     color: #7f8c8d;
     text-align: center;
@@ -196,6 +182,14 @@ label {
     cursor: not-allowed;
 }
 
+/* Sección de dirección y última compra */
+div > div {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f1f9f7;
+    border-radius: 6px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .table thead {
@@ -216,8 +210,6 @@ label {
         text-align: right;
         padding-left: 50%;
         position: relative;
-        border-bottom: none;
-        border-right: none;
     }
     
     .table td::before {
@@ -236,33 +228,3 @@ label {
         margin-bottom: 10px;
     }
 }
-  
-.notificaciones {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .notificacion {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .notificacion button {
-    background: none;
-    border: none;
-    color: #721c24;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  

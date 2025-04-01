@@ -5,6 +5,6 @@ export class Producto {
     stock!: number;
     proveedor!: string;
     costo!: number;
-    alertaBaja: number = 5; // Nivel de stock para activar la alerta
+    alertaBaja!: number; 
   }
   

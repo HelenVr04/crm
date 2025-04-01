@@ -1,14 +1,14 @@
 import { Injectable, inject } from '@angular/core';
 import { Producto } from '../models/producto.model';
-import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, updateDoc, increment } from '@angular/fire/firestore'; // Se importa increment
 import { first } from 'rxjs';
+import { getFirestore } from 'firebase/firestore'; // No es necesario importar FieldValue, solo getFirestore
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
   private db: Firestore = inject(Firestore);
-
   constructor() { }
 
   // Obtener productos
@@ -26,8 +26,8 @@ export class ProductoService {
       stock: producto.stock,
       proveedor: producto.proveedor,
       costo: producto.costo,
-      alertaBaja: producto.alertaBaja ?? 5 // 👈 Si es undefined, se asigna 5
-    };    
+      alertaBaja: producto.alertaBaja ?? 10 
+    };
     return addDoc(productosCollection, productoData);
   }
 
@@ -48,5 +48,14 @@ export class ProductoService {
   eliminarProducto(producto: Producto) {
     const documentRef = doc(this.db, 'productos', producto.id);
     return deleteDoc(documentRef);
+  }
+
+  // Actualizar el stock del producto
+  actualizarStock(idProducto: string, cantidad: number) {
+    const db = getFirestore(); // Obtén la instancia de Firestore
+    const documentRef = doc(db, 'productos', idProducto);
+    return updateDoc(documentRef, {
+      stock: increment(-cantidad) // Restamos la cantidad usando increment
+    });
   }
 }

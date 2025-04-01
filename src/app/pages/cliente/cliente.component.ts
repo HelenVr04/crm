@@ -11,29 +11,18 @@ import { ClienteService } from '../../services/cliente.service';
   styleUrl: './cliente.component.css'
 })
 export class ClienteComponent {
-  clientes: Cliente[] = [];
-  cliente: Cliente = new Cliente();
+  clientes: any;
+  cliente = new Cliente();
   diasDelMes: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
 
   constructor(private clienteService: ClienteService) {
     this.getClientes();
   }
 
-  async getClientes(): Promise<void> {
-    const clientesData = await firstValueFrom(this.clienteService.getClientes());
-    this.clientes = clientesData.map((data: any) => ({
-      id: data.id || '',
-      nombre: data.nombre || '',
-      telefono: data.telefono || '',
-      fechaCumpleanios: data.fechaCumpleanios || '',
-      calle: data.calle || '',
-      ciudad: data.ciudad || '',
-      codigoPostal: data.codigoPostal || '',
-      fechaCompra: data.fechaCompra || '',
-      productoComprado: data.productoComprado || '',
-      precioProducto: data.precioProducto || 0
-    }));
-  }  
+
+  async getClientes(): Promise<void>{
+    this.clientes = await firstValueFrom(this.clienteService.getClientes());
+  }
 
   async insertarCliente() {
     if (!this.validarCliente()) return;
@@ -43,7 +32,7 @@ export class ClienteComponent {
   }
 
   selectCliente(clienteSeleccionado: Cliente) {
-    this.cliente = { ...clienteSeleccionado };
+    this.cliente = clienteSeleccionado;
   }
 
   async updateCliente() {
@@ -62,9 +51,9 @@ export class ClienteComponent {
     }
   }
 
-  formatearFecha(fecha: string): string {
+  /*formatearFecha(fecha: string): string {
     return new Date(fecha).toLocaleDateString('es-MX');
-  }
+  }*/
 
   validarCliente(): boolean {
     if (!this.cliente.nombre || this.cliente.nombre.trim().length < 7) {
