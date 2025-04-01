@@ -120,6 +120,45 @@ body {
     opacity: 1;
     width: auto;
 }
+/* Botón de Salir */
+.logout-btn {
+    background-color: #195a9a;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    width: calc(100% - 20px);
+}
+
+/* Estado colapsado del botón */
+.menu .logout-btn span {
+    opacity: 0;
+    width: 0;
+    display: inline-block;
+    transition: opacity 0.2s ease, width 0.3s ease;
+}
+
+/* Estado expandido del botón */
+.menu:hover .logout-btn {
+    justify-content: flex-start;
+    padding: 12px 20px;
+}
+
+.menu:hover .logout-btn span {
+    opacity: 1;
+    width: auto;
+}
+
+.logout-btn:hover {
+    background-color: #4435e8;
+}
 
 /* Contenedor de las secciones */
 .content {

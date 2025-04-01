@@ -1,0 +1,121 @@
+/* Estilos generales */
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden; /* Evita el scroll */
+}
+
+/* Contenedor principal de 2 columnas */
+.login-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sección de la imagen (mitad izquierda) */
+.login-image-section {
+    flex: 1;
+    background-color: rgba(7, 41, 75, 0.7); /* Color de fondo por si la imagen no carga */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    backdrop-filter: blur(2px);
+}
+
+.login-image {
+    width: 50%;
+    height: 50%;
+     /* Asegura que la imagen cubra todo el espacio */
+}
+
+/* Sección del formulario (mitad derecha) */
+.login-form-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8f8f8;
+}
+
+/* Contenedor del formulario */
+.form-container {
+    background: white;
+    padding: 100px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 500px;
+}
+
+/* Estilos del logo */
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Título */
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
+    text-align: center;
+}
+
+/* Campos del formulario */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Botón */
+.btn-primary {
+    background: #07294b;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background: #000;
+}
+
+/* Mensajes de error */
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Footer */
+.footer {
+    margin-top: 30px;
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+}
+

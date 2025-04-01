@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {  OnInit } from '@angular/core';
 import { ProductoService } from '../../services/producto.service';
 import { Producto } from '../../models/producto.model';
 import { ProductoComponent } from '../producto/producto.component';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { ProductoComponent } from '../producto/producto.component';
 })
 export class HomeComponent implements OnInit {
   productosStockBajo: Producto[] = [];
+
 
   constructor(private productoService: ProductoService) {}
   ngOnInit(): void {
