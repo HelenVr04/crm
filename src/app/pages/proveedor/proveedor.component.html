@@ -1,10 +1,95 @@
-<div style="margin: 20px;">
-    <h1>GESTIÓN DE PROVEEDORES</h1>
-    <h2>Lista de Proveedores</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gestión de Proveedores</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f9; /* Fondo claro */
+            color: #1a1a1a; /* Texto en gris oscuro */
+        }
 
-    @if (proveedores.length > 0){
+        h1, h2 {
+            color: #003366; /* Azul oscuro del logo */
+        }
+
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .table-striped > tbody > tr:nth-of-type(odd) {
+            background-color: #f0f8ff; /* Azul claro */
+        }
+
+        .table-striped > tbody > tr:nth-of-type(even) {
+            background-color: #ffffff; /* Blanco */
+        }
+
+        .table-dark {
+            background-color: #003366; /* Azul oscuro */
+            color: white; /* Texto blanco para contraste */
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .btn-info {
+            background-color: #cc0000; /* Rojo del logo */
+            border-color: #cc0000;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background-color: #990000; /* Rojo más oscuro */
+            border-color: #990000;
+        }
+
+        .text-danger {
+            color: #cc0000; /* Rojo para mensajes de error */
+        }
+
+        .btn-primary {
+            background-color: #003366; /* Azul oscuro */
+            border-color: #003366;
+        }
+
+        .btn-primary:hover {
+            background-color: #002244; /* Azul más oscuro */
+            border-color: #002244;
+        }
+
+        .btn-warning {
+            background-color: #ffcc00; /* Amarillo cálido */
+            border-color: #ffcc00;
+            color: #1a1a1a;
+        }
+
+        .btn-warning:hover {
+            background-color: #e6b800; /* Amarillo más oscuro */
+            border-color: #e6b800;
+        }
+
+        .btn-danger {
+            background-color: #cc0000; /* Rojo del logo */
+            border-color: #cc0000;
+        }
+
+        .btn-danger:hover {
+            background-color: #990000; /* Rojo más oscuro */
+            border-color: #990000;
+        }
+    </style>
+</head>
+<body class="container py-4">
+
+    <h1 class="mb-4 text-center">GESTIÓN DE PROVEEDORES</h1>
+    <h2 class="mb-3">Lista de Proveedores</h2>
+
+    @if (proveedores.length > 0) {
         <table class="table table-striped">
-            <thead>
+            <thead class="table-dark">
                 <tr>
                     <th>Nombre</th>
                     <th>Teléfono</th>
@@ -14,16 +99,12 @@
                 </tr>
             </thead>
             <tbody>
-                @for (proveedor of proveedores; track proveedor.id){
+                @for (proveedor of proveedores; track proveedor.id) {
                     <tr>
                         <td>{{ proveedor.nombre }}</td>
                         <td>{{ proveedor.telefono }}</td>
                         <td>{{ proveedor.fechaCumpleanios }}</td>
-                        <td>
-                            {{ proveedor.calle }},
-                            {{ proveedor.ciudad }},
-                            {{ proveedor.codigoPostal }}
-                        </td>
+                        <td>{{ proveedor.calle }}, {{ proveedor.ciudad }}, {{ proveedor.codigoPostal }}</td>
                         <td>
                             <button class="btn btn-info" (click)="selectProveedor(proveedor)">Seleccionar</button>
                         </td>
@@ -31,62 +112,44 @@
                 }
             </tbody>
         </table>
-    }@else{
-        <h3>No hay proveedores disponibles</h3>
+    } @else {
+        <h3 class="text-danger">No hay proveedores disponibles</h3>
     }
 
-    <div>
+    <div class="mt-4">
         <h3>Formulario de Proveedores</h3>
         <form #proveedorForm="ngForm">
-            <div>
-                <label>NOMBRE:</label>
+            <div class="mb-3">
+                <label class="form-label">NOMBRE:</label>
                 <input type="text" class="form-control" [(ngModel)]="proveedor.nombre" name="nombre" required minlength="7" #nombre="ngModel"/>
-                @if(nombre.invalid && nombre.touched){
+                @if (nombre.invalid && nombre.touched) {
                     <small class="text-danger">El nombre debe tener al menos 7 caracteres.</small>
                 }
             </div>
 
-            <div>
-                <label>TELÉFONO:</label>
+            <div class="mb-3">
+                <label class="form-label">TELÉFONO:</label>
                 <input type="text" class="form-control" [(ngModel)]="proveedor.telefono" name="telefono" required pattern="\d{10}" #telefono="ngModel"/>
                 @if (telefono.invalid && telefono.touched) {
-                    <small class="text-danger">
-                        El teléfono es obligatorio y debe contener 10 dígitos.
-                    </small>
+                    <small class="text-danger">El teléfono debe contener 10 dígitos.</small>
                 }
             </div>
-            <div>
-                <label>FECHA DE NACIMIENTO:</label>
+
+            <div class="mb-3">
+                <label class="form-label">FECHA DE NACIMIENTO:</label>
                 <input type="date" class="form-control" [(ngModel)]="proveedor.fechaCumpleanios" name="fechaCumpleanios" required #fechaCumpleanios="ngModel"/>
                 @if (fechaCumpleanios.invalid && fechaCumpleanios.touched) {
-                    <small class="text-danger">
-                        La fecha de cumpleaños es obligatoria.
-                    </small>
+                    <small class="text-danger">La fecha de cumpleaños es obligatoria.</small>
                 }
             </div>
 
-            <div>
-                <h4>Dirección</h4>
-                <label>Calle:</label>
-                <input type="text" class="form-control" [(ngModel)]="proveedor.calle" name="calle" required #calle="ngModel"/>
-                @if (calle.invalid && calle.touched) {
-                    <small class="text-danger">Debe registrar la calle.</small>
-                }
-
-                <label>Ciudad:</label>
-                <input type="text" class="form-control" [(ngModel)]="proveedor.ciudad" name="ciudad" required #ciudad="ngModel"/>
-                @if (ciudad.invalid && ciudad.touched) {
-                    <small class="text-danger">Debe registrar la ciudad.</small>
-                }
-                <label>Código Postal:</label>
-                <input type="text" class="form-control" [(ngModel)]="proveedor.codigoPostal" name="codigoPostal" required pattern="\d{5}" #codigoPostal="ngModel"/>
-                @if (codigoPostal.invalid && codigoPostal.touched) {
-                    <small class="text-danger">Debe registrar el código postal.</small>
-                }
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-primary" (click)="insertarProveedor()" [disabled]="proveedorForm.invalid">Agregar</button>
+                <button type="button" class="btn btn-warning" (click)="updateProveedor()" [disabled]="proveedorForm.invalid">Modificar</button>
+                <button type="button" class="btn btn-danger" (click)="deleteProveedor()">Eliminar</button>
             </div>
-            <button type="button" class="btn btn-primary" (click)="insertarProveedor()" [disabled]="proveedorForm.invalid">Agregar</button>
-            <button type="button" class="btn btn-warning" (click)="updateProveedor()" [disabled]="proveedorForm.invalid">Modificar</button>
-            <button type="button" class="btn btn-danger" (click)="deleteProveedor()">Eliminar</button>
         </form>
     </div>
-</div>
+
+</body>
+</html>
