@@ -142,6 +142,21 @@
                     <small class="text-danger">La fecha de cumpleaños es obligatoria.</small>
                 }
             </div>
+            <div class="mb-3">
+                <label class="form-label">DIRECCIÓN:</label>
+                <label class="form-label">CALLE:</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.calle" name="calle" required #calle="ngModel"/>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">CIUDAD:</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.ciudad" name="ciudad" required #ciudad="ngModel"/>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">CÓDIGO POSTAL:</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.codigoPostal" name="codigoPostal" required #codigoPostal="ngModel"/>
+            </div>
 
             <div class="d-flex gap-2">
                 <button type="button" class="btn btn-primary" (click)="insertarProveedor()" [disabled]="proveedorForm.invalid">Agregar</button>
