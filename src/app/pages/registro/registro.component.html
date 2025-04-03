@@ -1,0 +1,75 @@
+<div class="register-container">
+    <!-- Mitad izquierda: Imagen -->
+    <div class="register-image-section">
+        <img src="log.png" class="register-image">
+    </div>
+    
+    <!-- Mitad derecha: Formulario -->
+    <div class="register-form-section">
+        <div class="form-container">
+            <div class="logo">
+                <img src="logo.png" width="30" height="30">
+            </div>
+            <h1>REGISTRO</h1>
+            @if(error) {
+              <div class="error-message">{{ error }}</div>
+            }
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>EMAIL</label>
+                    <input type="email" class="form-control" formControlName="email" />
+                    @if(form.get('email')?.touched && form.get('email')?.errors){
+                        <div class="validation-error">
+                            @if(form.get('email')?.errors?.['required']) {
+                                <div>Email es requerido</div>
+                            }
+                            @if(form.get('email')?.errors?.['pattern']) {
+                                <div>Email no válido</div>
+                            }
+                        </div>
+                    }
+                </div>
+                
+                <div class="form-group">
+                    <label>CONTRASEÑA</label>
+                    <input type="password" class="form-control" formControlName="password" />
+                    @if(form.get('password')?.touched && form.get('password')?.errors){
+                        <div class="validation-error">
+                            @if(form.get('password')?.errors?.['required']) {
+                                <div>Contraseña es requerida</div>
+                            }
+                            @if(form.get('password')?.errors?.['minlength']) {
+                                <div>Mínimo 8 caracteres</div>
+                            }
+                        </div>
+                    }
+                </div>
+                
+                <div class="form-group">
+                    <label>CONFIRMAR CONTRASEÑA</label>
+                    <input type="password" class="form-control" formControlName="confirmPassword" />
+                    @if(form.get('confirmPassword')?.touched && form.errors?.['mismatch']){
+                        <div class="validation-error">Las contraseñas no coinciden</div>
+                    }
+                </div>
+                
+                <button type="submit" class="btn btn-primary" [disabled]="loading">
+                    @if(loading) {
+                        <span>Registrando...</span>
+                    } @else {
+                        <span>Registrarse</span>
+                    }
+                </button>
+            </form>
+
+            <div class="login-link">
+                ¿Ya tienes una cuenta? <a (click)="goToLogin()">Inicia sesión aquí</a>
+            </div>
+
+            <div class="footer">
+                VAM
+            </div>
+        </div>
+    </div>
+</div>

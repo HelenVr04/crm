@@ -1,7 +1,7 @@
 <div class="login-container">
     <!-- Mitad izquierda: Imagen -->
     <div class="login-image-section">
-        <img src="log.png"  class="login-image">
+        <img src="log.png" class="login-image">
     </div>
     
     <!-- Mitad derecha: Formulario -->
@@ -28,8 +28,12 @@
                     }
                 </div>
                 
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
             </form>
+
+            <div class="register-link">
+                ¿No tienes una cuenta? <a (click)="goToRegister()">Regístrate aquí</a>
+            </div>
 
             <div class="footer">
                 VAM

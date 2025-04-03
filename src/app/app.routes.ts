@@ -9,6 +9,7 @@ import { ProveedorComponent } from './pages/proveedor/proveedor.component';
 
 import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './auth.guard';
+import { RegistroComponent } from './pages/registro/registro.component';
 
 export const routes: Routes = [
     {
@@ -16,7 +17,11 @@ export const routes: Routes = [
         component: LoginComponent
     },
     {
-        path:'Home',
+        path: 'registro',
+        component: RegistroComponent
+    },
+    {
+        path:'home',
         component: HomeComponent,
         canActivate: [authGuard]
     },
@@ -29,15 +34,16 @@ export const routes: Routes = [
         path:'inventario',
         component: ProductoComponent,
         canActivate: [authGuard]
-
     },
     {
         path: 'pedidos',
-        component: PedidoComponent
+        component: PedidoComponent,
+        canActivate: [authGuard]
     },
     {
         path:'proveedores',
-        component: ProveedorComponent
+        component: ProveedorComponent,
+        canActivate: [authGuard]
     },
     {
         path:'about',
