@@ -7,7 +7,7 @@ import { first } from 'rxjs';
   providedIn: 'root'
 })
 export class PedidoService {
-  private db: Firestore = inject(Firestore);
+  private db: Firestore = inject(Firestore); 
 
   constructor() { }
 

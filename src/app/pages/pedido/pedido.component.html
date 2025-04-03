@@ -10,16 +10,16 @@
                     <th>Productos</th>
                     <th>Total Costo</th>
                     <th>Fecha del Pedido</th>
-                    <th>Acciones</th>
+                    <th>Seleccionar</th>
                 </tr>
             </thead>
             <tbody>
                 @for (pedido of pedidos; track pedido.id) {
                     <tr>
-                        <td>{{ pedido.clienteId }}</td>
+                        <td>{{ pedido.clienteNombre }}</td>
                         <td>
                             <ul>
-                                @for (producto of pedido.productos; track producto.id) {
+                                @for (producto of pedido.productos; track producto) {
                                     <li>{{ producto.nombre }} - ${{ producto.costo }} x {{ producto.cantidad }}</li>
                                 }
                             </ul>
@@ -27,8 +27,7 @@
                         <td>${{ pedido.totalCosto }}</td>
                         <td>{{ pedido.fechaPedido }}</td>
                         <td>
-                            <button class="btn btn-info" (click)="selectPedido(pedido)">Editar</button>
-                            <button class="btn btn-danger" (click)="deletePedido()">Eliminar</button>
+                            <button class="btn btn-info" (click)="selectPedido(pedido)">Seleccionar</button>
                         </td>
                     </tr>
                 }
@@ -63,18 +62,13 @@
                                 <option [ngValue]="producto">{{ producto.nombre }}</option>
                             }
                         </select>
+                        
                     </div>
-                    <div>
-                        <h4>Productos seleccionados</h4>
-                        <ul>
-                            @for (producto of pedido.productos; track producto.productoId) {
-                                <li>
-                                    {{ producto.nombre }} - ${{ producto.costo }} x {{ producto.cantidad }}
-                                </li>
-                            }
-                        </ul>
-                    </div>
+                    @if(productos == null){
+                        <small class="text-danger">Debes seleccionar un producto.</small>
+                    }
                     
+                                       
                     @if (productoSeleccionado) {
                         <div>
                             <label>Precio:</label>
@@ -94,6 +88,16 @@
                         </button>
                     }
                 }
+            </div>
+            <div>
+                <h4>Productos seleccionados</h4>
+                <ul>
+                    @for (producto of pedido.productos; track producto.productoId) {
+                        <li>
+                            {{ producto.nombre }} - ${{ producto.costo }} x {{ producto.cantidad }}
+                        </li>
+                    }
+                </ul>
             </div>
 
             <div>

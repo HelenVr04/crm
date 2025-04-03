@@ -51,9 +51,9 @@ export class ProductoService {
   }
 
   // Actualizar el stock del producto
-  actualizarStock(idProducto: string, cantidad: number) {
+  actualizarStock(productoId: string, cantidad: number) {
     const db = getFirestore(); // Obtén la instancia de Firestore
-    const documentRef = doc(db, 'productos', idProducto);
+    const documentRef = doc(db, 'productos', productoId);
     return updateDoc(documentRef, {
       stock: increment(-cantidad) // Restamos la cantidad usando increment
     });

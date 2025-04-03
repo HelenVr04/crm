@@ -56,8 +56,6 @@ export class PedidoComponent {
   // Insertar un nuevo pedido
   async insertarPedido() {
     if (!this.validarPedido()) return;
-
-    // Obtener el cliente seleccionado para establecer el nombre
     const clienteSeleccionado = this.clientes.find(cliente => cliente.id === this.pedido.clienteId);
     if (clienteSeleccionado) {
         this.pedido.clienteNombre = clienteSeleccionado.nombre; // Asignar el nombre del cliente
@@ -65,6 +63,9 @@ export class PedidoComponent {
     await this.pedidoService.agregarPedido(this.pedido);
     this.getPedidos();
     this.pedido = new Pedido();
+    this.pedido.productos = [];  // Esto asegura que el nuevo pedido tenga un array vacío
+    this.productoSeleccionado = null;
+    this.cantidadSeleccionada = 1;
 }
 
   // Seleccionar un pedido
@@ -102,6 +103,10 @@ export class PedidoComponent {
     }
     if (!this.pedido.fechaPedido) {
       alert("Debe seleccionar la fecha del pedido");
+      return false;
+    }
+    if(!this.pedido.productos){
+      alert("Debe seleccionar al menos un producto para el pedido");
       return false;
     }
     return true;

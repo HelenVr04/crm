@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { ProductoService } from '../../services/producto.service';
+import { ProveedorService } from '../../services/proveedor.service';
 import { Producto } from '../../models/producto.model';
+import { ProveedorComponent } from '../proveedor/proveedor.component';
 
 @Component({
   selector: 'app-producto',
@@ -15,9 +17,16 @@ export class ProductoComponent {
   producto: Producto = new Producto();
   categorias: string[] = ['Vidrios', 'Aluminios', 'Accesorios'];
   notificaciones: Producto[] = [];
+  proveedores: any[]= [];
 
-  constructor(private productoService: ProductoService) {
-    this.getProductos();
+  constructor(private productoService: ProductoService, private proveedorService: ProveedorService) {
+      this.getProveedores();
+      this.getProductos();
+  }
+
+  //obtener proveedores 
+  async getProveedores(): Promise<void> {
+    this.proveedores = await firstValueFrom(this.proveedorService.getProvedores());
   }
   async getProductos(): Promise<void> {
     try {

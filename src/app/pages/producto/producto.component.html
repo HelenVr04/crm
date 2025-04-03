@@ -32,7 +32,6 @@
                         <td>{{ producto.proveedor }}</td>
                         <td>${{ producto.costo }}</td>
                         <td>
-                            <button class="btn btn-info btn-sm" (click)="selectProducto(producto)">Editar</button>
                             <button class="btn btn-info" (click)="selectProducto(producto)">Seleccionar</button>
                         </td>
                     </tr>
@@ -74,12 +73,15 @@
                     <small class="text-danger">Debe registrar la cantidad en stock.</small>
                 }
             </div>
-
-            <div class="mb-3">
-                <label class="form-label">PROVEEDOR:</label>
-                <input type="text" class="form-control" [(ngModel)]="producto.proveedor" name="proveedor" required #proveedor="ngModel"/>
+            <div>
+                <label>Proveedor:</label>
+                <select class="form-control" [(ngModel)]="producto.proveedor" name="proveedor" required #proveedor="ngModel">
+                    @for (proveedor of proveedores; track proveedor.id) {
+                        <option [value]="proveedor.id">{{ proveedor.nombre }}</option>
+                    }
+                </select>
                 @if (proveedor.invalid && proveedor.touched) {
-                    <small class="text-danger">Debe registrar el proveedor.</small>
+                    <div class="text-danger">Debes seleccionar un cliente.</div>
                 }
             </div>
 
