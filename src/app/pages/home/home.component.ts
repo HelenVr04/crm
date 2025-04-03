@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
             costo: producto.costo,
             alertaBaja: producto.alertaBaja
           }))
-          .filter((producto: Producto) => producto.stock <= producto.alertaBaja);
+          .filter((producto: Producto) => producto.stock <= 10);
       }
     } catch (error) {
       console.error("Error al obtener productos con stock bajo:", error);

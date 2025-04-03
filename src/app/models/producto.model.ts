@@ -5,6 +5,5 @@ export class Producto {
     stock!: number;
     proveedor!: string;
     costo!: number;
-    alertaBaja!: number; 
   }
   

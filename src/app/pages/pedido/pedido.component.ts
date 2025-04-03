@@ -20,6 +20,7 @@ export class PedidoComponent {
   clientes: any[] = [];
   productoSeleccionado: Producto | null = null;
   cantidadSeleccionada: number = 1;
+  mensaje='';
 
   
   pedido = new Pedido();
@@ -163,4 +164,23 @@ updateCosto() {
       return total + (producto.costo * producto.cantidad);
     }, 0);
   }
+// Función para actualizar solo el estado y el campo "pagado" del pedido
+updatePagado(pedidoSeleccionado: Pedido) {
+  // Si se seleccionó un pedido, solo actualiza el estado y pagado
+  const pedidoActualizado = {
+    ...pedidoSeleccionado,
+    estado: pedidoSeleccionado.estado,
+    pagado: pedidoSeleccionado.pagado
+  };
+
+  // Actualiza Firestore con el estado y pagado
+  this.pedidoService.modificarPedido(pedidoActualizado).then(() => {
+    console.log('Pedido actualizado');
+    this.getPedidos(); // Refrescar la lista de pedidos
+  }).catch(error => {
+    console.error("Error al actualizar el pedido:", error);
+  });
+}
+
+
 }

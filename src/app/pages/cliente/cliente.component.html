@@ -103,6 +103,20 @@
                     <small class="text-danger">El código postal debe contener 5 dígitos numéricos.</small>
                 }
             </div>
+            <div class="mb-3">
+                <label class="form-label">FECHA DE COMPRA:</label>
+                <input type="date" class="form-control" [(ngModel)]="cliente.fechaCompra" name="fechaCompra" required #fechaCompra="ngModel"/>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">PRODUCTO COMPRADO:</label>
+                <input type="text" class="form-control" [(ngModel)]="cliente.productoComprado" name="productoComprado" required #productoComprado="ngModel"/>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">PRECIO DEL PRODUCTO:</label>
+                <input type="number" class="form-control" [(ngModel)]="cliente.precioProducto" name="precioProducto" required #precioProducto="ngModel"/>
+            </div>
 
             <div class="d-flex gap-2">
                 <button type="button" class="btn btn-primary" (click)="insertarCliente()" [disabled]="clienteForm.invalid">Agregar</button>

@@ -38,7 +38,9 @@ export class PedidoService {
       clienteNombre: pedido.clienteNombre,
       fechaPedido: pedido.fechaPedido,
       productos: pedido.productos,
-      totalCosto: pedido.totalCosto
+      totalCosto: pedido.totalCosto,
+      estado: pedido.estado, // Solo actualiza el estado
+      pagado: pedido.pagado  // Solo actualiza el campo "pagado"
     });
   }
 

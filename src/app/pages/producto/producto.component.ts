@@ -44,14 +44,13 @@ export class ProductoComponent {
       return;
     }
     this.notificaciones = this.productos.filter((producto: Producto) => {
-      return producto.stock <= producto.alertaBaja;
+      return producto.stock <= 10;
     });
   }
   
   
   async insertarProducto() {
     if (!this.validarProducto()) return;
-    this.producto.alertaBaja = this.producto.alertaBaja ?? 10; 
     await this.productoService.agregarProducto(this.producto);
     this.getProductos();
     this.producto = new Producto();
@@ -102,7 +101,7 @@ export class ProductoComponent {
     return true;
   }
 
-  alertaStock(stock: number, alertaBaja: number): boolean {
-    return stock <= alertaBaja;
+  alertaStock(stock: number): boolean {
+    return stock <= 10;
   }
 }

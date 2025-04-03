@@ -10,6 +10,8 @@
                     <th>Productos</th>
                     <th>Total Costo</th>
                     <th>Fecha del Pedido</th>
+                    <th>Pagado</th>
+                    <th>Estado</th>
                     <th>Seleccionar</th>
                 </tr>
             </thead>
@@ -26,6 +28,17 @@
                         </td>
                         <td>${{ pedido.totalCosto }}</td>
                         <td>{{ pedido.fechaPedido }}</td>
+                        <td>
+                            <input type="checkbox" [(ngModel)]="pedido.pagado" (change)="updatePagado(pedido)" />
+                          </td>
+                          <td>
+                            <select [(ngModel)]="pedido.estado" (change)="updatePagado(pedido)">
+                              <option value="pendiente">Pendiente</option>
+                              <option value="en_proceso">En Proceso</option>
+                              <option value="completado">Completado</option>
+                            </select>
+                          </td>                         
+                          
                         <td>
                             <button class="btn btn-info" (click)="selectPedido(pedido)">Seleccionar</button>
                         </td>

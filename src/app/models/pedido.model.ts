@@ -5,4 +5,7 @@ export class Pedido {
     fechaPedido!: string;
     productos!: { productoId: string; nombre: string; cantidad: number; costo: number }[]; 
     totalCosto!: number;
+    pagado!: boolean;
+    estado!: string;
+
 }  

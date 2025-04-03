@@ -26,7 +26,6 @@ export class ProductoService {
       stock: producto.stock,
       proveedor: producto.proveedor,
       costo: producto.costo,
-      alertaBaja: producto.alertaBaja ?? 10 
     };
     return addDoc(productosCollection, productoData);
   }
@@ -40,7 +39,6 @@ export class ProductoService {
       stock: producto.stock,
       proveedor: producto.proveedor,
       costo: producto.costo,
-      alertaBaja: producto.alertaBaja
     });
   }
 

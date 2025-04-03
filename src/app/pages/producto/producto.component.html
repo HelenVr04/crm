@@ -77,7 +77,7 @@
                 <label>Proveedor:</label>
                 <select class="form-control" [(ngModel)]="producto.proveedor" name="proveedor" required #proveedor="ngModel">
                     @for (proveedor of proveedores; track proveedor.id) {
-                        <option [value]="proveedor.id">{{ proveedor.nombre }}</option>
+                        <option [value]="proveedor.nombre">{{ proveedor.nombre }}</option>
                     }
                 </select>
                 @if (proveedor.invalid && proveedor.touched) {
