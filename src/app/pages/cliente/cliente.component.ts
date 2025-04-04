@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { Cliente } from '../../models/cliente.model';
 import { ClienteService } from '../../services/cliente.service';
+import { PedidoService } from '../../services/pedido.service';
+
 
 @Component({
   selector: 'app-cliente',
@@ -13,9 +15,13 @@ import { ClienteService } from '../../services/cliente.service';
 export class ClienteComponent {
   clientes: any;
   cliente = new Cliente();
+  clienteSeleccionado: Cliente = new Cliente();
   diasDelMes: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
+  historialPedidos: any[] = [];
+  mostrarModal: boolean = false;
 
-  constructor(private clienteService: ClienteService) {
+
+  constructor(private clienteService: ClienteService,   private pedidoService: PedidoService) {
     this.getClientes();
   }
 
@@ -54,6 +60,17 @@ export class ClienteComponent {
   /*formatearFecha(fecha: string): string {
     return new Date(fecha).toLocaleDateString('es-MX');
   }*/
+    verHistorial(cliente: Cliente) {
+      this.clienteSeleccionado = cliente; 
+      this.pedidoService.getPedidosPorCliente(cliente.id).subscribe(pedidos => {
+        this.historialPedidos = pedidos;
+        this.mostrarModal = true;
+      });
+    }
+    cerrarModal() {
+      this.mostrarModal = false;
+    }    
+    
 
   validarCliente(): boolean {
     if (!this.cliente.nombre || this.cliente.nombre.trim().length < 7) {

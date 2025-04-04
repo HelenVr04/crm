@@ -1,7 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { Pedido } from '../models/pedido.model';
 import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, updateDoc } from '@angular/fire/firestore';
-import { first } from 'rxjs';
+import { first, Observable } from 'rxjs';
+import { query, where, getDocs } from '@angular/fire/firestore';
+
 
 @Injectable({
   providedIn: 'root'
@@ -49,4 +51,12 @@ export class PedidoService {
     const documentRef = doc(this.db, 'pedidos', pedido.id);
     return deleteDoc(documentRef);
   }
+
+// Obtener pedidos por cliente
+getPedidosPorCliente(clienteId: string): Observable<Pedido[]> {
+  const pedidosCollection = collection(this.db, 'pedidos');
+  const pedidosQuery = query(pedidosCollection, where('clienteId', '==', clienteId));
+  return collectionData(pedidosQuery, { idField: 'id' }) as Observable<Pedido[]>;
+}
+
 }

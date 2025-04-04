@@ -26,10 +26,7 @@ export class ClienteService {
       fechaCumpleanios: cliente.fechaCumpleanios,
       calle: cliente.calle,
       ciudad: cliente.ciudad,
-      codigoPostal: cliente.codigoPostal,
-      fechaCompra: cliente.fechaCompra,
-      productoComprado: cliente.productoComprado,
-      precioProducto: cliente.precioProducto
+      codigoPostal: cliente.codigoPostal
     };
     return addDoc(clientesCollection, clienteData);
   }
@@ -43,10 +40,7 @@ export class ClienteService {
       fechaCumpleanios: cliente.fechaCumpleanios,
       calle: cliente.calle,
       ciudad: cliente.ciudad,
-      codigoPostal: cliente.codigoPostal,
-      fechaCompra: cliente.fechaCompra,
-      productoComprado: cliente.productoComprado,
-      precioProducto: cliente.precioProducto
+      codigoPostal: cliente.codigoPostal
     });
   }
 

@@ -21,7 +21,7 @@
     <h1 class="mb-4 text-center">GESTIÓN DE CLIENTES</h1>
     <h2 class="mb-3">Lista de Clientes</h2>
 
-    @if (clientes.length > 0) {
+    @if (clientes) {
         <table class="table table-striped">
             <thead class="table-dark">
                 <tr>
@@ -29,7 +29,7 @@
                     <th>Teléfono</th>
                     <th>Fecha de nacimiento</th>
                     <th>Dirección</th>
-                    <th>Última compra</th>
+                    <th>Historial de compras</th>
                     <th>Seleccionar</th>
                 </tr>
             </thead>
@@ -40,13 +40,7 @@
                         <td>{{ cliente.telefono }}</td>
                         <td>{{ cliente.fechaCumpleanios }}</td>
                         <td>{{ cliente.calle }}, {{ cliente.ciudad }}, {{ cliente.codigoPostal }}</td>
-                        <td>
-                            @if (cliente.fechaCompra && cliente.productoComprado) {
-                                {{ cliente.productoComprado }} - ${{ cliente.precioProducto }} - {{ cliente.fechaCompra }}
-                            } @else {
-                                <small>No hay compras registradas.</small>
-                            }
-                        </td>
+                        <td><button class="btn btn-info" (click)="verHistorial(cliente)">Ver Historial</button></td>
                         <td>
                             <button class="btn btn-info" (click)="selectCliente(cliente)">Seleccionar</button>
                         </td>
@@ -56,6 +50,25 @@
         </table>
     } @else {
         <h3 class="text-danger">No hay clientes disponibles</h3>
+    }
+
+    @if(mostrarModal){
+        <div class="modal">
+            <div class="modal-content">
+              <span class="close" (click)="cerrarModal()">&times;</span>
+              <h4>Historial de Compras de {{ clienteSeleccionado.nombre }}</h4>
+              <ul>
+                @for(pedido of historialPedidos; track pedido.id){
+                    <li>Fecha del Pedido: {{ pedido.fechaPedido }} - Total: ${{ pedido.totalCosto }} - Productos:</li>
+                    <ul>
+                        @for(producto of pedido.productos; track producto.id) {
+                            <li>{{ producto.nombre }}</li>
+                        }
+                    </ul>
+                }
+              </ul>
+            </div>
+        </div>
     }
 
     <div class="mt-4">
@@ -103,21 +116,6 @@
                     <small class="text-danger">El código postal debe contener 5 dígitos numéricos.</small>
                 }
             </div>
-            <div class="mb-3">
-                <label class="form-label">FECHA DE COMPRA:</label>
-                <input type="date" class="form-control" [(ngModel)]="cliente.fechaCompra" name="fechaCompra" required #fechaCompra="ngModel"/>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">PRODUCTO COMPRADO:</label>
-                <input type="text" class="form-control" [(ngModel)]="cliente.productoComprado" name="productoComprado" required #productoComprado="ngModel"/>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">PRECIO DEL PRODUCTO:</label>
-                <input type="number" class="form-control" [(ngModel)]="cliente.precioProducto" name="precioProducto" required #precioProducto="ngModel"/>
-            </div>
-
             <div class="d-flex gap-2">
                 <button type="button" class="btn btn-primary" (click)="insertarCliente()" [disabled]="clienteForm.invalid">Agregar</button>
                 <button type="button" class="btn btn-warning" (click)="updateCliente()" [disabled]="clienteForm.invalid">Modificar Cliente</button>
