@@ -12,29 +12,28 @@
       <div class="d-flex flex-column align-items-center justify-content-start vh-100 text-center pt-5">
             <h1>HOME</h1>
             <p>Bienvenido al sistema CRM</p>
+            @if (productosStockBajo) {
+                <div class="stock-bajo-container">
+                    <h2>Productos con Stock Bajo</h2>
+                    <div class="card">
+                        @for (producto of productosStockBajo; track producto) {
+                            <h3>{{ producto.nombre }}</h3>
+                            <p>Categoría: {{ producto.categoria }}</p>
+                            <p><strong>Stock: {{ producto.stock }}</strong></p>
+                            <p>Proveedor: {{ producto.proveedor }}</p>
+                            <p>Costo: ${{ producto.costo }}</p>
+                        }
+                    </div>
+                
+                  </div>
+                }@else {
+                    <div class="no-stock-bajo">
+                        <h3>No hay productos con stock bajo en este momento.</h3>
+                    </div>
+                }               
         </div>
     </div>
-
     <!-- Bootstrap JS (Opcional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-@if (productosStockBajo.length >0) {
-<div class="stock-bajo-container">
-    <h2>Productos con Stock Bajo</h2>
-    <div class="card">
-        @for (producto of productosStockBajo; track producto) {
-            <h3>{{ producto.nombre }}</h3>
-            <p>Categoría: {{ producto.categoria }}</p>
-            <p><strong>Stock: {{ producto.stock }}</strong></p>
-            <p>Proveedor: {{ producto.proveedor }}</p>
-            <p>Costo: ${{ producto.costo }}</p>
-        }
-    </div>
-
-  </div>
-}@else {
-    <div class="no-stock-bajo">
-        <h3>No hay productos con stock bajo en este momento.</h3>
-    </div>
-}
