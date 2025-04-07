@@ -31,6 +31,7 @@
                     <th>Fecha del Pedido</th>
                     <th>Pagado</th>
                     <th>Estado</th>
+                    <th>Recordar Pago</th>
                     <th>Seleccionar</th>
                 </tr>
             </thead>
@@ -56,7 +57,13 @@
                                 <option value="en_proceso">En Proceso</option>
                                 <option value="completado">Completado</option>
                             </select>
-                        </td>                         
+                        </td>             
+                        <td> 
+                            <button class="btn-info"
+                                (click)="recordarPago(getClienteTelefono(pedido.clienteId) || '')">
+                                Recordar
+                            </button>
+                        </td>
                         <td>
                             <button class="btn btn-info" (click)="selectPedido(pedido)">Seleccionar</button>
                         </td>

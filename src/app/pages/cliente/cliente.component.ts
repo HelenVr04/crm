@@ -92,14 +92,6 @@ export class ClienteComponent {
       this.mostrarModal = false;
     }    
     
-    recordarPago(cliente: Cliente) {
-      const mensaje = `Hola ${cliente.nombre}, recuerda que tienes un pago pendiente en Vidrios y Aluminios de México. ¡Gracias!`;
-      this.mensajesService.enviarMensaje(cliente.telefono, mensaje).subscribe({
-        next: () => alert('✅ Recordatorio enviado por WhatsApp'),
-        error: (err: any) => alert('❌ Error al enviar recordatorio')
-      });
-    }
-    
 
   validarCliente(): boolean {
     if (!this.cliente.nombre || this.cliente.nombre.trim().length < 7) {

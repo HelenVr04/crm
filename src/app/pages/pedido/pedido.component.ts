@@ -23,6 +23,7 @@ export class PedidoComponent {
   productoSeleccionado: Producto | null = null;
   cantidadSeleccionada: number = 1;
   mensaje='';
+  telefonoCli: string[] = [];
 
   
   pedido = new Pedido();
@@ -37,6 +38,7 @@ export class PedidoComponent {
     this.getProductos();
     this.getPedidos();
     this.pedido.productos = []; 
+  
   }
 
   // Obtener los clientes
@@ -44,7 +46,33 @@ export class PedidoComponent {
     this.clientes = await firstValueFrom(this.clienteService.getClientes());
     console.log(this.clientes);
     
+    // Aquí puedes recorrer todos los clientes y guardar el teléfono si lo necesitas para más adelante
+    this.telefonoCli = this.clientes.map(cliente => cliente.telefono);
+    console.log("Teléfonos de clientes:", this.telefonoCli);
   }
+  //recordar pago
+
+  recordarPago(clienteTelefono: string) {
+    if (!clienteTelefono) {
+        alert('❌ El cliente no tiene número de teléfono registrado');
+        return;
+    }
+    const mensaje = `Hola, recuerda que tienes un pago pendiente. ¡Gracias!`;
+
+    this.mensajesService.enviarMensaje(clienteTelefono, mensaje).subscribe({
+        next: () => alert('✅ Recordatorio enviado por WhatsApp'),
+        error: err => {
+            console.error('❌ Error al enviar recordatorio:', err);
+            alert('❌ Error al enviar recordatorio');
+        }
+    });
+}
+  
+// Método para obtener el número de teléfono del cliente por su ID
+getClienteTelefono(clienteId: string): string | null {
+  const cliente = this.clientes.find(c => c.id === clienteId);
+  return cliente ? cliente.telefono : null;
+}
 
 
   // Obtener los productos
@@ -72,8 +100,7 @@ export class PedidoComponent {
     });
   
     console.log(this.pedidos);
-  }
-  
+  } 
   async insertarPedido() {
     if (!this.validarPedido()) return;
   
@@ -226,7 +253,6 @@ updatePagado(pedidoSeleccionado: Pedido) {
   }).catch(error => {
     console.error("Error al actualizar el pedido:", error);
   });
+
 }
-
-
 }
