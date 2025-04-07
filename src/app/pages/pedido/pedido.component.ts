@@ -7,6 +7,8 @@ import { ProductoService } from '../../services/producto.service';
 import { PedidoService } from '../../services/pedido.service';
 import { Producto } from '../../models/producto.model';
 import { Cliente } from '../../models/cliente.model';
+import { MensajesService } from '../../services/mensajes.service';
+
 
 @Component({
   selector: 'app-pedido',
@@ -15,7 +17,7 @@ import { Cliente } from '../../models/cliente.model';
   styleUrls: ['./pedido.component.css']
 })
 export class PedidoComponent {
-  pedidos: any[] = []; 
+  pedidos: Pedido[] = [];
   productos: any[] = [];
   clientes: any[] = [];
   productoSeleccionado: Producto | null = null;
@@ -28,7 +30,8 @@ export class PedidoComponent {
   constructor(
     private clienteService: ClienteService,
     private productoService: ProductoService, 
-    private pedidoService: PedidoService
+    private pedidoService: PedidoService,
+    private mensajesService: MensajesService
   ) {
     this.getClientes();
     this.getProductos();
@@ -49,26 +52,69 @@ export class PedidoComponent {
     this.productos = await firstValueFrom(this.productoService.getProductos());  // Asegúrate de tener este servicio
   }
 
-  // Obtener los pedidos
   async getPedidos(): Promise<void> {
-    this.pedidos = await firstValueFrom(this.pedidoService.getPedidos());
-    console.log(this.pedidos); // Verifica qué datos se están recuperando
-}
-  // Insertar un nuevo pedido
+    const pedidosObtenidos = await firstValueFrom(this.pedidoService.getPedidos());
+      this.pedidos = pedidosObtenidos.map((doc: any) => {
+      return {
+        id: doc.id || '',
+        clienteId: doc.clienteId || '',
+        clienteNombre: doc.clienteNombre || '',
+        fechaPedido: doc.fechaPedido || '',
+        productos: doc.productos || [],
+        totalCosto: doc.totalCosto || 0,
+        estado: doc.estado || '',
+        pagado: doc.pagado ?? false,
+      } as Pedido;
+    });
+  
+    this.pedidos.sort((a, b) => {
+      return new Date(b.fechaPedido).getTime() - new Date(a.fechaPedido).getTime();
+    });
+  
+    console.log(this.pedidos);
+  }
+  
   async insertarPedido() {
     if (!this.validarPedido()) return;
+  
     const clienteSeleccionado = this.clientes.find(cliente => cliente.id === this.pedido.clienteId);
-    if (clienteSeleccionado) {
-        this.pedido.clienteNombre = clienteSeleccionado.nombre; // Asignar el nombre del cliente
+    if (clienteSeleccionado?.telefono) {
+      let telefonoFormateado = clienteSeleccionado.telefono;
+  
+      if (!telefonoFormateado.startsWith('+')) {
+        telefonoFormateado = '+52' + telefonoFormateado;
+      }
+  
+      console.log('Número de teléfono formateado:', telefonoFormateado);
+  
+      const mensaje = `¡Gracias por tu compra, ${clienteSeleccionado.nombre}!`;
+      this.mensajesService.enviarMensaje(telefonoFormateado, mensaje)
+        .subscribe({
+          next: res => console.log('Mensaje enviado 😎'),
+          error: err => console.error('Error al enviar mensaje: ', err)
+        });
     }
+  
+    // 🔧 Llenar el campo clienteNombre
+    const cliente = this.clientes.find(c => c.id === this.pedido.clienteId);
+    if (cliente) {
+      this.pedido.clienteNombre = cliente.nombre;
+    } else {
+      alert("No se encontró el nombre del cliente");
+      return;
+    }
+  
     await this.pedidoService.agregarPedido(this.pedido);
+  
+    // Reset del formulario
     this.getPedidos();
     this.pedido = new Pedido();
-    this.pedido.productos = [];  // Esto asegura que el nuevo pedido tenga un array vacío
+    this.pedido.productos = [];
     this.productoSeleccionado = null;
     this.cantidadSeleccionada = 1;
-}
-
+  }
+  
+  
   // Seleccionar un pedido
   selectPedido(pedidoSeleccionado: Pedido) {
     this.pedido = pedidoSeleccionado;

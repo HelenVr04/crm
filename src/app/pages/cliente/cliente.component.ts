@@ -19,6 +19,7 @@ export class ClienteComponent {
   diasDelMes: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
   historialPedidos: any[] = [];
   mostrarModal: boolean = false;
+  mensajesService: any;
 
 
   constructor(private clienteService: ClienteService,   private pedidoService: PedidoService) {
@@ -71,6 +72,28 @@ export class ClienteComponent {
       this.mostrarModal = false;
     }    
     
+    recordarPago(cliente: Cliente) {
+      const mensaje = `Hola ${cliente.nombre}, recuerda que tienes un pago pendiente. ¡Gracias!`;
+      this.mensajesService.enviarMensaje(cliente.telefono, mensaje).subscribe({
+        next: () => console.log('Recordatorio enviado'),
+        error: (err: any) => console.error('Error al enviar recordatorio', err)
+      });
+    }
+    ngOnInit() {
+      this.clienteService.getClientes().subscribe((clientes: any[]) => {
+        const hoy = new Date().toISOString().slice(5, 10); // "MM-DD"
+        clientes.forEach(cliente => {
+          const cumple = cliente.fechaNacimiento?.slice(5, 10);
+          if (cumple === hoy) {
+            const mensaje = `¡Feliz cumpleaños ${cliente.nombre}! Te damos un 10% de descuento 🎉`;
+            this.mensajesService.enviarMensaje(cliente.telefono, mensaje).subscribe({
+              next: () => console.log('Felicidades enviadas 🎂'),
+              error: (err: any) => console.error('Error al enviar mensaje', err)
+            });
+          }
+        });
+      });
+    }
 
   validarCliente(): boolean {
     if (!this.cliente.nombre || this.cliente.nombre.trim().length < 7) {
