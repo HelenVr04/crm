@@ -29,7 +29,6 @@
                     <th>Teléfono</th>
                     <th>Fecha de nacimiento</th>
                     <th>Dirección</th>
-                    <th>SMS</th>
                     <th>Historial de compras</th>
                     <th>Seleccionar</th>
                 </tr>
@@ -41,8 +40,6 @@
                         <td>{{ cliente.telefono }}</td>
                         <td>{{ cliente.fechaCumpleanios }}</td>
                         <td>{{ cliente.calle }}, {{ cliente.ciudad }}, {{ cliente.codigoPostal }}</td>
-                        <td> <button class="btn btn-info" (click)="recordarPago(cliente)">SMS</button>
-                        </td>
                         <td><button class="btn btn-info" (click)="verHistorial(cliente)">Ver Historial</button></td>
                         <td>
                             <button class="btn btn-info" (click)="selectCliente(cliente)">Seleccionar</button>

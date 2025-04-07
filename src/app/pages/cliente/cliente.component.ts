@@ -4,6 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { Cliente } from '../../models/cliente.model';
 import { ClienteService } from '../../services/cliente.service';
 import { PedidoService } from '../../services/pedido.service';
+import { MensajesService } from '../../services/mensajes.service';
 
 
 @Component({
@@ -19,12 +20,12 @@ export class ClienteComponent {
   diasDelMes: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
   historialPedidos: any[] = [];
   mostrarModal: boolean = false;
-  mensajesService: any;
   mostrarFormulario: boolean = false;
 
 
 
-  constructor(private clienteService: ClienteService,   private pedidoService: PedidoService) {
+  constructor(private clienteService: ClienteService,   private pedidoService: PedidoService,   private mensajesService: MensajesService // <-- Agrega esto
+  ) {
     this.getClientes();
   }
 
@@ -92,12 +93,13 @@ export class ClienteComponent {
     }    
     
     recordarPago(cliente: Cliente) {
-      const mensaje = `Hola ${cliente.nombre}, recuerda que tienes un pago pendiente. ¡Gracias!`;
+      const mensaje = `Hola ${cliente.nombre}, recuerda que tienes un pago pendiente en Vidrios y Aluminios de México. ¡Gracias!`;
       this.mensajesService.enviarMensaje(cliente.telefono, mensaje).subscribe({
-        next: () => console.log('Recordatorio enviado'),
-        error: (err: any) => console.error('Error al enviar recordatorio', err)
+        next: () => alert('✅ Recordatorio enviado por WhatsApp'),
+        error: (err: any) => alert('❌ Error al enviar recordatorio')
       });
     }
+    
 
   validarCliente(): boolean {
     if (!this.cliente.nombre || this.cliente.nombre.trim().length < 7) {
