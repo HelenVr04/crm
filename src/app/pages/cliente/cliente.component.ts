@@ -20,12 +20,23 @@ export class ClienteComponent {
   historialPedidos: any[] = [];
   mostrarModal: boolean = false;
   mensajesService: any;
+  mostrarFormulario: boolean = false;
+
 
 
   constructor(private clienteService: ClienteService,   private pedidoService: PedidoService) {
     this.getClientes();
   }
 
+  // Método para mostrar el formulario (modal)
+  mostrarFormularioCliente(): void {
+    this.mostrarFormulario = true;
+  }
+
+  // Método para ocultar el formulario (modal)
+  cerrarFormulario(): void {
+    this.mostrarFormulario = false;
+  }
 
   async getClientes(): Promise<void>{
     this.clientes = await firstValueFrom(this.clienteService.getClientes());
@@ -36,10 +47,14 @@ export class ClienteComponent {
     await this.clienteService.agregarCliente(this.cliente);
     this.getClientes();
     this.cliente = new Cliente();
+    console.log('Cliente agregado/modificado', this.cliente);
+    this.cerrarFormulario(); // Cerrar el formulario después de agregar/modificar
   }
 
   selectCliente(clienteSeleccionado: Cliente) {
     this.cliente = clienteSeleccionado;
+    this.mostrarFormulario = true;  // Mostrar el formulario
+
   }
 
   async updateCliente() {
@@ -47,6 +62,8 @@ export class ClienteComponent {
     await this.clienteService.modificarCliente(this.cliente);
     this.getClientes();
     this.cliente = new Cliente();
+    console.log('Cliente agregado/modificado', this.cliente);
+    this.cerrarFormulario(); // Cerrar el formulario después de agregar/modificar
   }
 
   async deleteCliente() {
@@ -55,6 +72,8 @@ export class ClienteComponent {
       await this.clienteService.eliminarCliente(this.cliente);
       this.getClientes();
       this.cliente = new Cliente();
+      console.log('Cliente agregado/modificado', this.cliente);
+    this.cerrarFormulario(); // Cerrar el formulario después de agregar/modificar
     }
   }
 
@@ -77,21 +96,6 @@ export class ClienteComponent {
       this.mensajesService.enviarMensaje(cliente.telefono, mensaje).subscribe({
         next: () => console.log('Recordatorio enviado'),
         error: (err: any) => console.error('Error al enviar recordatorio', err)
-      });
-    }
-    ngOnInit() {
-      this.clienteService.getClientes().subscribe((clientes: any[]) => {
-        const hoy = new Date().toISOString().slice(5, 10); // "MM-DD"
-        clientes.forEach(cliente => {
-          const cumple = cliente.fechaNacimiento?.slice(5, 10);
-          if (cumple === hoy) {
-            const mensaje = `¡Feliz cumpleaños ${cliente.nombre}! Te damos un 10% de descuento 🎉`;
-            this.mensajesService.enviarMensaje(cliente.telefono, mensaje).subscribe({
-              next: () => console.log('Felicidades enviadas 🎂'),
-              error: (err: any) => console.error('Error al enviar mensaje', err)
-            });
-          }
-        });
       });
     }
 
