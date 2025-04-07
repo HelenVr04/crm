@@ -8,51 +8,54 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #d4f1f5; /* Color de fondo azul claro */
+            background-color: #e9f5f9; /* Color de fondo más suave */
             font-family: 'Arial', sans-serif;
         }
         .container-fluid {
             background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 40px;
         }
         h1 {
-            color: #02074b; /* Color azul marino */
-            font-size: 3rem;
+            color: #003366; /* Color azul marino más oscuro */
+            font-size: 3.5rem;
             font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
         p {
-            color: #555;
-            font-size: 1.2rem;
+            color: #666;
+            font-size: 1.25rem;
         }
         .stock-bajo-container {
-            background-color: #021b52; /* Color azul más claro */
-            padding: 20px;
-            border-radius: 10px;
+            background-color: #04395a; /* Color azul más vibrante */
+            padding: 25px;
+            border-radius: 15px;
             margin-top: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
         .stock-bajo-container h2 {
-            color: #ffffff; /* Color azul marino oscuro */
-            font-size: 2rem;
+            color: #ffffff; /* Color blanco */
+            font-size: 2.5rem;
         }
         .card {
             background-color: #ffffff; /* Fondo blanco para las tarjetas */
             border: 1px solid #00796b; /* Borde azul marino */
-            border-radius: 10px;
-            margin-bottom: 15px;
-            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            padding: 25px;
             min-height: 250px;
-            max-width: 100%;
-            height: 300px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.02); /* Efecto de hover */
         }
         .card h3 {
-            color: #792600; /* Color azul marino */
-            font-size: 1.5rem;
+            color: #005f99; /* Color azul marino */
+            font-size: 1.75rem;
             font-weight: bold;
         }
         .card p {
@@ -60,26 +63,31 @@
             font-size: 1rem;
         }
         .no-stock-bajo {
-            padding: 20px;
-            background-color: #e0e0e0;
-            border-radius: 10px;
+            padding: 25px;
+            background-color: #f0f0f0;
+            border-radius: 15px;
             margin-top: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
         .no-stock-bajo h3 {
-            color: #666;
-            font-size: 1.5rem;
+            color: #333;
+            font-size: 1.75rem;
         }
         .row {
             margin-top: 20px;
+            display: flex; /* Cambiado a flex */
+            flex-wrap: wrap; /* Permite que las tarjetas se envuelvan */
+            justify-content: flex-start; /* Alinea las tarjetas a la izquierda */
+            gap: 20px; /* Espacio entre tarjetas */
         }
         .col-md-4 {
-            margin-bottom: 20px;
+            flex: 0 0 auto; /* Evita que las columnas se expandan */
+            width: 300px; /* Ancho fijo para las tarjetas */
         }
         .stock-bajo-container .row {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
         }
         .d-flex {
             display: flex;
@@ -97,7 +105,7 @@
             text-align: center;
         }
         .pt-5 {
-            padding-top: 3rem;
+            padding-top: 4rem;
         }
         .vh-100 {
             min-height: 100vh;
