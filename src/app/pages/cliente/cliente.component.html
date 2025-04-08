@@ -27,6 +27,7 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Teléfono</th>
+                    <th>Correo electrónico</th>
                     <th>Fecha de nacimiento</th>
                     <th>Dirección</th>
                     <th>Historial de compras</th>
@@ -38,6 +39,7 @@
                     <tr>
                         <td>{{ cliente.nombre }}</td>
                         <td>{{ cliente.telefono }}</td>
+                        <td>{{ cliente.correo }}</td>
                         <td>{{ cliente.fechaCumpleanios }}</td>
                         <td>{{ cliente.calle }}, {{ cliente.ciudad }}, {{ cliente.codigoPostal }}</td>
                         <td><button class="btn btn-info" (click)="verHistorial(cliente)">Ver Historial</button></td>
@@ -87,6 +89,13 @@
                 <input type="text" class="form-control" [(ngModel)]="cliente.telefono" name="telefono" required pattern="\d{10}" #telefono="ngModel"/>
                 @if (telefono.invalid && telefono.touched) {
                     <small class="text-danger">El teléfono debe contener 10 dígitos.</small>
+                }
+            </div>
+            <div>
+                <label class="form-label">CORREO ELECTRÓNICO:</label>
+                <input type="email" class="form-control" [(ngModel)]="cliente.correo" name="correo" required #correo="ngModel"/>
+                @if (correo.invalid && correo.touched) {
+                    <small class="text-danger">Debe registrar un correo electrónico válido.</small>
                 }
             </div>
 

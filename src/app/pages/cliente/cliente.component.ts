@@ -118,6 +118,11 @@ export class ClienteComponent {
       alert("La fecha de cumpleaños es obligatoria");
       return false;
     }
+    if (!this.cliente.correo || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.cliente.correo)) {
+      alert("El correo electrónico no tiene un formato válido");
+      return false;
+    }
+    
     return true;
   }
 }
