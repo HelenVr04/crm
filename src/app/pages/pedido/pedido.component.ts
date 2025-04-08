@@ -7,6 +7,8 @@ import { ProductoService } from '../../services/producto.service';
 import { PedidoService } from '../../services/pedido.service';
 import { Producto } from '../../models/producto.model';
 import { Cliente } from '../../models/cliente.model';
+import { MensajesService } from '../../services/mensajes.service';
+
 
 @Component({
   selector: 'app-pedido',
@@ -15,12 +17,13 @@ import { Cliente } from '../../models/cliente.model';
   styleUrls: ['./pedido.component.css']
 })
 export class PedidoComponent {
-  pedidos: any[] = []; 
+  pedidos: Pedido[] = [];
   productos: any[] = [];
   clientes: any[] = [];
   productoSeleccionado: Producto | null = null;
   cantidadSeleccionada: number = 1;
   mensaje='';
+  telefonoCli: string[] = [];
 
   
   pedido = new Pedido();
@@ -28,12 +31,14 @@ export class PedidoComponent {
   constructor(
     private clienteService: ClienteService,
     private productoService: ProductoService, 
-    private pedidoService: PedidoService
+    private pedidoService: PedidoService,
+    private mensajesService: MensajesService
   ) {
     this.getClientes();
     this.getProductos();
     this.getPedidos();
     this.pedido.productos = []; 
+  
   }
 
   // Obtener los clientes
@@ -41,34 +46,83 @@ export class PedidoComponent {
     this.clientes = await firstValueFrom(this.clienteService.getClientes());
     console.log(this.clientes);
     
+    // Aquí puedes recorrer todos los clientes y guardar el teléfono si lo necesitas para más adelante
+    this.telefonoCli = this.clientes.map(cliente => cliente.telefono);
+    console.log("Teléfonos de clientes:", this.telefonoCli);
   }
-
-
+    
   // Obtener los productos
   async getProductos(): Promise<void> {
     this.productos = await firstValueFrom(this.productoService.getProductos());  // Asegúrate de tener este servicio
   }
-
-  // Obtener los pedidos
+ //obtener pedidos 
   async getPedidos(): Promise<void> {
-    this.pedidos = await firstValueFrom(this.pedidoService.getPedidos());
-    console.log(this.pedidos); // Verifica qué datos se están recuperando
-}
-  // Insertar un nuevo pedido
+    const pedidosObtenidos = await firstValueFrom(this.pedidoService.getPedidos());
+      this.pedidos = pedidosObtenidos.map((doc: any) => {
+      return {
+        id: doc.id || '',
+        clienteId: doc.clienteId || '',
+        clienteNombre: doc.clienteNombre || '',
+        clienteTelefono: doc.clienteTelefono || '',
+        fechaPedido: doc.fechaPedido || '',
+        productos: doc.productos || [],
+        totalCosto: doc.totalCosto || 0,
+        estado: doc.estado || '',
+        pagado: doc.pagado ?? false,
+      } as Pedido;
+    });
+  
+    this.pedidos.sort((a, b) => {
+      return new Date(b.fechaPedido).getTime() - new Date(a.fechaPedido).getTime();
+    });
+  
+    console.log(this.pedidos);
+  } 
+
+
+  //insertar pedidos
   async insertarPedido() {
     if (!this.validarPedido()) return;
+  
     const clienteSeleccionado = this.clientes.find(cliente => cliente.id === this.pedido.clienteId);
     if (clienteSeleccionado) {
-        this.pedido.clienteNombre = clienteSeleccionado.nombre; // Asignar el nombre del cliente
+      this.pedido.clienteNombre = clienteSeleccionado.nombre;
+      this.pedido.clienteTelefono = clienteSeleccionado.telefono;
     }
+  
     await this.pedidoService.agregarPedido(this.pedido);
+  
     this.getPedidos();
     this.pedido = new Pedido();
-    this.pedido.productos = [];  // Esto asegura que el nuevo pedido tenga un array vacío
+    this.pedido.productos = [];
     this.productoSeleccionado = null;
     this.cantidadSeleccionada = 1;
+  }
+  
+  
+  //recordar pago
+recordarPago(clienteTelefono: string, clienteNombre: string) {
+  if (!clienteTelefono) {
+    alert('❌ El cliente no tiene número de teléfono registrado');
+    return;
+  }
+  let telefonoFormateado = clienteTelefono; // <- usar el que viene del parámetro
+  if (!telefonoFormateado.startsWith('+')) {
+    telefonoFormateado = '+52' + telefonoFormateado;
+    console.log(telefonoFormateado);
+    
+  }
+  const mensaje = `Hola ${clienteNombre}, esperamos que te encuentres muy bien 😊 Solo queríamos recordarte que tienes un pago pendiente con Vidrios y Aluminios de México (VAM). Si ya realizaste el pago, por favor ignora este mensaje. ¡Gracias por tu preferencia! 🙌`;
+  this.mensajesService.enviarMensaje(telefonoFormateado, mensaje).subscribe({
+    next: () => alert('✅ Recordatorio enviado por WhatsApp'),
+    error: err => {
+      console.error('❌ Error al enviar recordatorio:', err);
+      alert('❌ Error al enviar recordatorio');
+    }
+  });
 }
 
+  
   // Seleccionar un pedido
   selectPedido(pedidoSeleccionado: Pedido) {
     this.pedido = pedidoSeleccionado;
@@ -180,7 +234,9 @@ updatePagado(pedidoSeleccionado: Pedido) {
   }).catch(error => {
     console.error("Error al actualizar el pedido:", error);
   });
+
 }
 
 
+ 
 }

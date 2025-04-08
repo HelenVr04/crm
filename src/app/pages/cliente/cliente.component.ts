@@ -4,6 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { Cliente } from '../../models/cliente.model';
 import { ClienteService } from '../../services/cliente.service';
 import { PedidoService } from '../../services/pedido.service';
+import { MensajesService } from '../../services/mensajes.service';
 
 
 @Component({
@@ -19,12 +20,24 @@ export class ClienteComponent {
   diasDelMes: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
   historialPedidos: any[] = [];
   mostrarModal: boolean = false;
+  mostrarFormulario: boolean = false;
 
 
-  constructor(private clienteService: ClienteService,   private pedidoService: PedidoService) {
+
+  constructor(private clienteService: ClienteService,   private pedidoService: PedidoService,   private mensajesService: MensajesService // <-- Agrega esto
+  ) {
     this.getClientes();
   }
 
+  // Método para mostrar el formulario (modal)
+  mostrarFormularioCliente(): void {
+    this.mostrarFormulario = true;
+  }
+
+  // Método para ocultar el formulario (modal)
+  cerrarFormulario(): void {
+    this.mostrarFormulario = false;
+  }
 
   async getClientes(): Promise<void>{
     this.clientes = await firstValueFrom(this.clienteService.getClientes());
@@ -35,10 +48,14 @@ export class ClienteComponent {
     await this.clienteService.agregarCliente(this.cliente);
     this.getClientes();
     this.cliente = new Cliente();
+    console.log('Cliente agregado/modificado', this.cliente);
+    this.cerrarFormulario(); // Cerrar el formulario después de agregar/modificar
   }
 
   selectCliente(clienteSeleccionado: Cliente) {
     this.cliente = clienteSeleccionado;
+    this.mostrarFormulario = true;  // Mostrar el formulario
+
   }
 
   async updateCliente() {
@@ -46,6 +63,8 @@ export class ClienteComponent {
     await this.clienteService.modificarCliente(this.cliente);
     this.getClientes();
     this.cliente = new Cliente();
+    console.log('Cliente agregado/modificado', this.cliente);
+    this.cerrarFormulario(); // Cerrar el formulario después de agregar/modificar
   }
 
   async deleteCliente() {
@@ -54,6 +73,8 @@ export class ClienteComponent {
       await this.clienteService.eliminarCliente(this.cliente);
       this.getClientes();
       this.cliente = new Cliente();
+      console.log('Cliente agregado/modificado', this.cliente);
+    this.cerrarFormulario(); // Cerrar el formulario después de agregar/modificar
     }
   }
 
@@ -97,6 +118,11 @@ export class ClienteComponent {
       alert("La fecha de cumpleaños es obligatoria");
       return false;
     }
+    if (!this.cliente.correo || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.cliente.correo)) {
+      alert("El correo electrónico no tiene un formato válido");
+      return false;
+    }
+    
     return true;
   }
 }
