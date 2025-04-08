@@ -59,10 +59,9 @@
                             </select>
                         </td>             
                         <td> 
-                            <button class="btn-info"
-                                (click)="recordarPago(getClienteTelefono(pedido.clienteId) || '')">
+                            <button class="btn btn-info" (click)="recordarPago(pedido.clienteTelefono, pedido.clienteNombre)">
                                 Recordar
-                            </button>
+                              </button>                              
                         </td>
                         <td>
                             <button class="btn btn-info" (click)="selectPedido(pedido)">Seleccionar</button>
