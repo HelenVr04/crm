@@ -48,7 +48,8 @@ export const routes: Routes = [
     },
     {
         path: 'graficas',
-        component: GraficasComponent
+        component: GraficasComponent,
+        canActivate: [authGuard]
     },
     {
         path:'about',
