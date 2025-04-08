@@ -3,7 +3,7 @@
     <div class="register-image-section">
         <img src="log.png" class="register-image">
     </div>
-    
+
     <!-- Mitad derecha: Formulario -->
     <div class="register-form-section">
         <div class="form-container">
@@ -30,7 +30,7 @@
                         </div>
                     }
                 </div>
-                
+
                 <div class="form-group">
                     <label>CONTRASEÑA</label>
                     <input type="password" class="form-control" formControlName="password" />
@@ -45,7 +45,7 @@
                         </div>
                     }
                 </div>
-                
+
                 <div class="form-group">
                     <label>CONFIRMAR CONTRASEÑA</label>
                     <input type="password" class="form-control" formControlName="confirmPassword" />
@@ -53,7 +53,7 @@
                         <div class="validation-error">Las contraseñas no coinciden</div>
                     }
                 </div>
-                
+
                 <button type="submit" class="btn btn-primary" [disabled]="loading">
                     @if(loading) {
                         <span>Registrando...</span>

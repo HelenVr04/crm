@@ -1,253 +1,156 @@
-/* Estilos Generales */
+/* General */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
-    line-height: 1.6;
-    padding: 20px;
+  font-family: 'Nunito Sans', sans-serif; /* Tipografía moderna y amigable */
+  background-color: #F4F7FC; /* Fondo más suave */
+  color: #333;
+  line-height: 1.8;
+  font-size: 18px;
 }
 
+/* Títulos */
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif; /* Toque sofisticado y profesional */
+  font-weight: bold;
+  text-align: center; /* Centrado para mejor impacto */
+  letter-spacing: 0.8px;
+}
+
+/* Título principal con línea completa */
 h1 {
-    color: #2c3e50;
-    margin-bottom: 20px;
-    font-size: 2.2rem;
-    border-bottom: 2px solid #001f3f; /* Cambiado a azul marino */
-    padding-bottom: 10px;
+  font-size: 2.3rem; /* Tamaño refinado */
+  font-weight: bold;
+  position: relative;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
 }
 
-h2, h3, h4 {
-    color: #34495e;
-    margin: 15px 0;
+h1::after {
+  content: "";
+  display: block; /* Hace que la línea aparezca debajo del título */
+  width: 100%; /* Línea abarca toda la página */
+  height: 3px;
+  background-color: #3E5064; /* Color elegante */
+  border-radius: 2px;
+  margin-top: 8px; /* Espaciado entre el título y la línea */
 }
 
+/* Espaciado refinado para títulos */
 h2 {
-    font-size: 1.8rem;
+  font-size: 2rem;
+  margin-bottom: 12px;
 }
 
 h3 {
-    font-size: 1.5rem;
+  font-size: 1.7rem;
+  margin-bottom: 8px;
 }
 
-h4 {
-    font-size: 1.2rem;
-    margin-top: 20px;
+/* Botones con estilo más minimalista */
+.btn {
+  background: linear-gradient(45deg, #3E5064, #56697D);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Contenedor principal */
-div[margin="20px"] {
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+.btn:hover {
+  background: #758aa1;
+  transform: scale(1.09);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Tabla de clientes */
+/* Botón de Agregar */
+.btn-agregar {
+  background: linear-gradient(45deg, #28A745, #43D26F);
+}
+
+.btn-agregar:hover {
+  background: #218838;
+}
+
+/* Botón de Modificar */
+.btn-modificar {
+  background: linear-gradient(45deg, #FFC107, #FFD54F);
+}
+
+.btn-modificar:hover {
+  background: #E0A800;
+}
+
+/* Botón de Eliminar */
+.btn-eliminar {
+  background: linear-gradient(45deg, #DC3545, #FF5A5F);
+}
+
+.btn-eliminar:hover {
+  background: #C82333;
+}
+
+/* Tablas sin bordes */
 .table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border-collapse: collapse; /* Evita espacios entre celdas */
 }
 
-.table thead tr {
-    background-color: #001f3f; /* Azul marino */
-    color: white;
-    text-align: left;
+.table thead th {
+  font-size: 14px;
+  padding: 10px;
+  max-width: 140px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: #3E5064;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-.table th,
-.table td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-}
-
-.table tbody tr {
-    border-bottom: 1px solid #dddddd;
+.table tbody td {
+  font-size: 14px;
 }
 
 .table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-.table tbody tr:last-of-type {
-    border-bottom: 2px solid #001f3f; /* Azul marino */
+  background-color: #E8ECF3;
 }
 
 .table tbody tr:hover {
-    background-color: rgba(178, 34, 34, 0.1); /* Rojo mate con transparencia */
+  background-color: #DCE2EA;
+  cursor: pointer;
 }
 
-/* Estilos para el mensaje "No hay clientes" */
-h3.text-muted {
-    color: #7f8c8d;
-    text-align: center;
-    margin: 40px 0;
-    font-style: italic;
-}
-
-/* Formulario */
+/* Formulario más simple y elegante */
 form {
-    margin-top: 30px;
-    background: #f9f9f9;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-}
-
-label {
-    display: block;
-    margin: 10px 0 5px;
-    font-weight: 600;
-    color: #2c3e50;
+  background: #FFFFFF;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #D1D5DB;
 }
 
 .form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    font-size: 16px;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
 }
 
 .form-control:focus {
-    border-color: #001f3f; /* Azul marino */
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 31, 63, 0.3); /* Azul marino con transparencia */
+  border-color: #A0743F;
+  box-shadow: 0px 0px 6px rgba(160, 116, 63, 0.5);
 }
 
-/* Mensajes de error */
-.text-danger {
-    color: #b22222; /* Rojo mate */
-    font-size: 0.85rem;
-    margin-bottom: 15px;
-    display: block;
+/* Logo con aspecto más limpio */
+.navbar-brand img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
-/* Botones */
-.btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-right: 10px;
-    margin-top: 15px;
-    transition: all 0.3s ease;
+.navbar-brand img:hover {
+  transform: scale(1.05);
+  filter: brightness(1.15);
 }
-
-.btn-primary {
-    background-color: #001f3f; /* Azul marino */
-    color: white;
-}
-
-.btn-primary:hover {
-    background-color: #003366; /* Azul marino más oscuro */
-}
-
-.btn-warning {
-    background-color: #b22222; /* Rojo mate */
-    color: white;
-}
-
-.btn-warning:hover {
-    background-color: #8b1a1a; /* Rojo mate más oscuro */
-}
-
-.btn-danger {
-    background-color: #b22222; /* Rojo mate */
-    color: white;
-}
-
-.btn-danger:hover {
-    background-color: #8b1a1a; /* Rojo mate más oscuro */
-}
-
-.btn-info {
-    background-color: #001f3f; /* Azul marino */
-    color: white;
-    padding: 6px 12px;
-    font-size: 14px;
-}
-
-.btn-info:hover {
-    background-color: #003366; /* Azul marino más oscuro */
-}
-
-.btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-/* Sección de dirección y última compra */
-div > div {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #f1f9f7;
-    border-radius: 6px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .table thead {
-        display: none;
-    }
-    
-    .table, .table tbody, .table tr, .table td {
-        display: block;
-        width: 100%;
-    }
-    
-    .table tr {
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-    }
-    
-    .table td {
-        text-align: right;
-        padding-left: 50%;
-        position: relative;
-    }
-    
-    .table td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 15px;
-        width: 45%;
-        padding-right: 10px;
-        font-weight: bold;
-        text-align: left;
-    }
-    
-    .btn {
-        display: block;
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    
-}
-
-.modal {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  .modal-content {
-    background-color: white;
-    margin: 10% auto;
-    padding: 20px;
-    width: 50%;
-  }
-  .close {
-    color: red;
-    float: right;
-    cursor: pointer;
-  }
-  

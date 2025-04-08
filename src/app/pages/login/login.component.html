@@ -1,43 +1,43 @@
 <div class="login-container">
-    <!-- Mitad izquierda: Imagen -->
-    <div class="login-image-section">
-        <img src="log.png" class="login-image">
-    </div>
-    
-    <!-- Mitad derecha: Formulario -->
-    <div class="login-form-section">
-        <div class="form-container">
-            <div class="logo">
-                <img src="logo.png" width="30" height="30">
-            </div>
-            <h1>LOGIN</h1>
+  <!-- Mitad izquierda: Imagen -->
+  <div class="login-image-section">
+      <img src="log.png" class="login-image">
+  </div>
 
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                    <label>EMAIL</label>
-                    <input type="email" class="form-control" formControlName="email" />
-                    @if(form.get('email')?.touched && form.get('email')?.errors){
-                        <div class="error-message">Error de validación</div>
-                    }
-                </div>
-                <div class="form-group">
-                    <label>PASSWORD</label>
-                    <input type="password" class="form-control" formControlName="password" />
-                    @if(form.get('password')?.touched && form.get('password')?.errors || this.error){
-                        <div class="error-message">Error de validación</div>
-                    }
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-            </form>
+  <!-- Mitad derecha: Formulario -->
+  <div class="login-form-section">
+      <div class="form-container">
+          <div class="logo">
+              <img src="logo.png" width="30" height="30">
+          </div>
+          <h1>LOGIN</h1>
 
-            <div class="register-link">
-                ¿No tienes una cuenta? <a (click)="goToRegister()">Regístrate aquí</a>
-            </div>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                  <label>EMAIL</label>
+                  <input type="email" class="form-control" formControlName="email" />
+                  @if(form.get('email')?.touched && form.get('email')?.errors){
+                      <div class="error-message">Error de validación</div>
+                  }
+              </div>
+              <div class="form-group">
+                  <label>PASSWORD</label>
+                  <input type="password" class="form-control" formControlName="password" />
+                  @if(form.get('password')?.touched && form.get('password')?.errors || this.error){
+                      <div class="error-message">Error de validación</div>
+                  }
+              </div>
 
-            <div class="footer">
-                VAM
-            </div>
-        </div>
-    </div>
+              <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+          </form>
+
+          <div class="register-link">
+              ¿No tienes una cuenta? <a (click)="goToRegister()">Regístrate aquí</a>
+          </div>
+
+          <div class="footer">
+              VAM
+          </div>
+      </div>
+  </div>
 </div>

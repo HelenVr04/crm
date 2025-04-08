@@ -1,0 +1,107 @@
+/* Fuente */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;500&display=swap');
+
+/* Estilos generales */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+/* Contenedor principal */
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Título principal */
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    color: #021444; /* Azul naval */
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Subtítulos */
+h2 {
+    font-size: 1.8em;
+    margin-top: 25px;
+    color: #021444; /* Azul naval */
+    font-weight: 600;
+}
+
+/* Párrafos */
+p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* Listas */
+ul {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #444;
+}
+
+.highlight {
+    color: #f39c12; /* Naranja brillante */
+    font-weight: bold;
+}
+
+/* Pie de página */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #888;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.footer a {
+    color: #021444;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Botón de contacto */
+.btn-contacto {
+    background-color: #021444; /* Azul naval */
+    color: white;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    text-align: center;
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+    transition: background-color 0.3s;
+}
+
+.btn-contacto:hover {
+    background-color: #003366;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2em;
+    }
+
+    h2 {
+        font-size: 1.6em;
+    }
+}

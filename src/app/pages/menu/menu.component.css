@@ -1,4 +1,34 @@
 /* Estilos Generales */
+
+.menu a {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el mouse */
+.menu a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #1abc9c;
+  transform: scale(1.05); /* Hace un pequeño efecto de aumento */
+}
+
+/* Añadir un subrayado animado */
+.menu a::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  bottom: 4px;
+  width: 0;
+  height: 2px;
+  background: #1abc9c;
+  transition: width 0.3s ease;
+}
+
+/* Mostrar el subrayado en hover */
+.menu a:hover::after {
+  width: calc(100% - 20px);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -12,14 +42,14 @@ body {
 }
 
 .container {
-    display: flex; 
+    display: flex;
     width: 100%;
 }
 
 /* Cambiar el menú de fixed a relative */
 .menu {
     background: #07294b;
-    position: fixed; 
+    position: fixed;
     left: 0;
     top: 0;
     width: 70px;
@@ -40,7 +70,7 @@ body {
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     transition: margin-left 0.3s ease;
-    flex: 1; 
+    flex: 1;
 }
 
 /* Expandir al hacer hover */
@@ -49,7 +79,7 @@ body {
 }
 
 .menu:hover + .content {
-    margin-left: 250px; 
+    margin-left: 250px;
 }
 
 /* Logo/Brand */
@@ -155,3 +185,88 @@ body {
         margin-left: 90px;
     }
 }
+.logout-btn {
+  background: linear-gradient(45deg, #e74c3c, #ff7675); /* Gradiente de colores */
+  color: white;
+  border: none;
+  padding: 14px;
+  margin: 10px;
+  border-radius: 30px; /* Botón con esquinas más redondeadas */
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  width: calc(100% - 20px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de brillo al pasar el mouse */
+.logout-btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.logout-btn:hover::before {
+  opacity: 1;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(45deg, #c0392b, #ff5252); /* Cambio de color al hacer hover */
+  transform: scale(1.08);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+}
+.menu a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Alinea el contenido a la izquierda */
+  padding-left: 8px; /* Ajusta según necesites */
+}
+
+.menu a span {
+  margin-right: 12px; /* Espacio entre el ícono y el texto */
+  font-size: 25px; /* Ajusta el tamaño según lo que necesites */
+}
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.navbar-brand img {
+  width: 50px; /* Aumenta el tamaño */
+  height: 50px;
+  border-radius: 10px; /* Bordes suavizados */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Efecto de sombra */
+  transition: all 0.3s ease;
+}
+.navbar-brand img:hover {
+  transform: scale(1.1); /* Hace que el logo crezca un poco */
+  filter: brightness(1.2); /* Le da un efecto más vibrante */
+}
+.navbar-brand img {
+  opacity: 0;
+  transform: scale(0.8);
+  animation: fadeInLogo 0.5s ease forwards;
+}
+
+@keyframes fadeInLogo {
+  to {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
+
+
