@@ -24,6 +24,7 @@ export class ClienteService {
       nombre: cliente.nombre,
       telefono: cliente.telefono,
       fechaCumpleanios: cliente.fechaCumpleanios,
+      correo: cliente.correo,
       calle: cliente.calle,
       ciudad: cliente.ciudad,
       codigoPostal: cliente.codigoPostal
@@ -37,6 +38,7 @@ export class ClienteService {
     return updateDoc(documentRef, {
       nombre: cliente.nombre,
       telefono: cliente.telefono,
+      correo: cliente.correo,
       fechaCumpleanios: cliente.fechaCumpleanios,
       calle: cliente.calle,
       ciudad: cliente.ciudad,

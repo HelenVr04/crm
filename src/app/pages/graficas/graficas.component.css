@@ -1,0 +1,12 @@
+.card {
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.chart-container {
+    min-height: 300px;
+}

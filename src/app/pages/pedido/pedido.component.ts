@@ -23,6 +23,7 @@ export class PedidoComponent {
   productoSeleccionado: Producto | null = null;
   cantidadSeleccionada: number = 1;
   mensaje='';
+  telefonoCli: string[] = [];
 
   
   pedido = new Pedido();
@@ -37,6 +38,7 @@ export class PedidoComponent {
     this.getProductos();
     this.getPedidos();
     this.pedido.productos = []; 
+  
   }
 
   // Obtener los clientes
@@ -44,14 +46,16 @@ export class PedidoComponent {
     this.clientes = await firstValueFrom(this.clienteService.getClientes());
     console.log(this.clientes);
     
+    // Aquí puedes recorrer todos los clientes y guardar el teléfono si lo necesitas para más adelante
+    this.telefonoCli = this.clientes.map(cliente => cliente.telefono);
+    console.log("Teléfonos de clientes:", this.telefonoCli);
   }
-
-
+    
   // Obtener los productos
   async getProductos(): Promise<void> {
     this.productos = await firstValueFrom(this.productoService.getProductos());  // Asegúrate de tener este servicio
   }
-
+ //obtener pedidos 
   async getPedidos(): Promise<void> {
     const pedidosObtenidos = await firstValueFrom(this.pedidoService.getPedidos());
       this.pedidos = pedidosObtenidos.map((doc: any) => {
@@ -59,6 +63,7 @@ export class PedidoComponent {
         id: doc.id || '',
         clienteId: doc.clienteId || '',
         clienteNombre: doc.clienteNombre || '',
+        clienteTelefono: doc.clienteTelefono || '',
         fechaPedido: doc.fechaPedido || '',
         productos: doc.productos || [],
         totalCosto: doc.totalCosto || 0,
@@ -72,41 +77,21 @@ export class PedidoComponent {
     });
   
     console.log(this.pedidos);
-  }
-  
+  } 
+
+
+  //insertar pedidos
   async insertarPedido() {
     if (!this.validarPedido()) return;
   
     const clienteSeleccionado = this.clientes.find(cliente => cliente.id === this.pedido.clienteId);
-    if (clienteSeleccionado?.telefono) {
-      let telefonoFormateado = clienteSeleccionado.telefono;
-  
-      if (!telefonoFormateado.startsWith('+')) {
-        telefonoFormateado = '+52' + telefonoFormateado;
-      }
-  
-      console.log('Número de teléfono formateado:', telefonoFormateado);
-  
-      const mensaje = `¡Gracias por tu compra, ${clienteSeleccionado.nombre}!`;
-      this.mensajesService.enviarMensaje(telefonoFormateado, mensaje)
-        .subscribe({
-          next: res => console.log('Mensaje enviado 😎'),
-          error: err => console.error('Error al enviar mensaje: ', err)
-        });
-    }
-  
-    // 🔧 Llenar el campo clienteNombre
-    const cliente = this.clientes.find(c => c.id === this.pedido.clienteId);
-    if (cliente) {
-      this.pedido.clienteNombre = cliente.nombre;
-    } else {
-      alert("No se encontró el nombre del cliente");
-      return;
+    if (clienteSeleccionado) {
+      this.pedido.clienteNombre = clienteSeleccionado.nombre;
+      this.pedido.clienteTelefono = clienteSeleccionado.telefono;
     }
   
     await this.pedidoService.agregarPedido(this.pedido);
   
-    // Reset del formulario
     this.getPedidos();
     this.pedido = new Pedido();
     this.pedido.productos = [];
@@ -114,6 +99,29 @@ export class PedidoComponent {
     this.cantidadSeleccionada = 1;
   }
   
+  
+  //recordar pago
+recordarPago(clienteTelefono: string, clienteNombre: string) {
+  if (!clienteTelefono) {
+    alert('❌ El cliente no tiene número de teléfono registrado');
+    return;
+  }
+  let telefonoFormateado = clienteTelefono; // <- usar el que viene del parámetro
+  if (!telefonoFormateado.startsWith('+')) {
+    telefonoFormateado = '+52' + telefonoFormateado;
+    console.log(telefonoFormateado);
+    
+  }
+  const mensaje = `Hola ${clienteNombre}, esperamos que te encuentres muy bien 😊 Solo queríamos recordarte que tienes un pago pendiente con Vidrios y Aluminios de México (VAM). Si ya realizaste el pago, por favor ignora este mensaje. ¡Gracias por tu preferencia! 🙌`;
+  this.mensajesService.enviarMensaje(telefonoFormateado, mensaje).subscribe({
+    next: () => alert('✅ Recordatorio enviado por WhatsApp'),
+    error: err => {
+      console.error('❌ Error al enviar recordatorio:', err);
+      alert('❌ Error al enviar recordatorio');
+    }
+  });
+}
+
   
   // Seleccionar un pedido
   selectPedido(pedidoSeleccionado: Pedido) {
@@ -226,7 +234,9 @@ updatePagado(pedidoSeleccionado: Pedido) {
   }).catch(error => {
     console.error("Error al actualizar el pedido:", error);
   });
+
 }
 
 
+ 
 }

@@ -10,6 +10,7 @@ import { ProveedorComponent } from './pages/proveedor/proveedor.component';
 import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './auth.guard';
 import { RegistroComponent } from './pages/registro/registro.component';
+import { GraficasComponent } from './pages/graficas/graficas.component';
 
 export const routes: Routes = [
     {
@@ -43,6 +44,11 @@ export const routes: Routes = [
     {
         path:'proveedores',
         component: ProveedorComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'graficas',
+        component: GraficasComponent,
         canActivate: [authGuard]
     },
     {
