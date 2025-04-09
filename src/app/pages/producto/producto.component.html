@@ -74,7 +74,7 @@
                 }
             </div>
             <div>
-                <label>Proveedor:</label>
+                <label class="form-label">PROVEEDOR:</label>
                 <select class="form-control" [(ngModel)]="producto.proveedor" name="proveedor" required #proveedor="ngModel">
                     @for (proveedor of proveedores; track proveedor.id) {
                         <option [value]="proveedor.nombre">{{ proveedor.nombre }}</option>

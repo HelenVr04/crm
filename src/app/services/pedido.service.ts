@@ -1,4 +1,4 @@
-  import { Injectable, inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
   import { Pedido } from '../models/pedido.model';
   import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, updateDoc } from '@angular/fire/firestore';
   import { first, Observable } from 'rxjs';

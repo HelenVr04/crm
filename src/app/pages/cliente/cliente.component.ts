@@ -82,12 +82,16 @@ export class ClienteComponent {
     return new Date(fecha).toLocaleDateString('es-MX');
   }*/
     verHistorial(cliente: Cliente) {
-      this.clienteSeleccionado = cliente; 
+      this.clienteSeleccionado = cliente;
       this.pedidoService.getPedidosPorCliente(cliente.id).subscribe(pedidos => {
         this.historialPedidos = pedidos;
+        console.log('Pedidos obtenidos:', pedidos);  // Verifica que los pedidos sean correctos.
         this.mostrarModal = true;
+        console.log('mostrarModal:', this.mostrarModal);  // Verifica si mostrarModal se actualiza
       });
     }
+    
+    
     cerrarModal() {
       this.mostrarModal = false;
     }    
