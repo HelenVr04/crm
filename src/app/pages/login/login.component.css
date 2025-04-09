@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Nunito Sans';
   background: linear-gradient(135deg, #121212, #1C1C1C); /* Negro carbón */
   color: #fff;
 }
@@ -35,7 +35,7 @@
 
 /* TÍTULOS */
 h1 {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Nunito-Sans';
   font-size: 30px;
   margin-bottom: 12px;
   color: #FFD700; /* Dorado */

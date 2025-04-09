@@ -1,6 +1,6 @@
 /* General */
 body {
-  font-family: 'Nunito Sans', sans-serif; /* Tipografía moderna y amigable */
+  font-family: 'Nunito Sans'; /* Tipografía moderna y amigable */
   background-color: #F4F7FC; /* Fondo más suave */
   color: #333;
   line-height: 1.8;
@@ -9,7 +9,7 @@ body {
 
 /* Títulos */
 h1, h2, h3, h4 {
-  font-family: 'Playfair Display', serif; /* Toque sofisticado y profesional */
+  font-family: 'Playfair Display'; /* Toque sofisticado y profesional */
   font-weight: bold;
   text-align: center; /* Centrado para mejor impacto */
   letter-spacing: 0.8px;

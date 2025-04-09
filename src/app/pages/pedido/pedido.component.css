@@ -3,7 +3,7 @@
 
 /* Estilos Generales */
 body {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: 'Nunito Sans';
   background-color: #F4F7FC; /* Fondo suave */
   color: #333;
   line-height: 1.8;
@@ -12,7 +12,7 @@ body {
 
 /* Títulos */
 h1, h2, h3, h4 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Playfair Display';
   font-weight: bold;
   text-align: center;
   letter-spacing: 0.8px;
