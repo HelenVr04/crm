@@ -1,9 +1,8 @@
 /* FUENTES */
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
 
 /* Estilos Generales */
 body {
-  font-family: 'Nunito Sans';
+  font-family: 'Nunito Sans', sans-serif;
   background-color: #F4F7FC; /* Fondo suave */
   color: #333;
   line-height: 1.8;
@@ -12,7 +11,7 @@ body {
 
 /* Títulos */
 h1, h2, h3, h4 {
-  font-family: 'Playfair Display';
+  font-family: 'Playfair Display', serif;
   font-weight: bold;
   text-align: center;
   letter-spacing: 0.8px;

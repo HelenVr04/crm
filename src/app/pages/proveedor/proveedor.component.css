@@ -1,9 +1,7 @@
-/* FUENTES */
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Playfair+Display:wght@700&display=swap');
 
 /* ======= ESTILO GENERAL ======= */
 body {
-  font-family: 'Nunito Sans';
+  font-family: 'Nunito Sans', sans-serif;
   background-color: #F4F7FC;
   color: #333;
   font-size: 18px;
@@ -12,7 +10,7 @@ body {
 
 /* ======= TÍTULOS ======= */
 h1, h2, h3, h4 {
-  font-family: 'Playfair Display';
+  font-family: 'Playfair Display', serif;
   font-weight: bold;
   text-align: center;
   letter-spacing: 0.8px;
