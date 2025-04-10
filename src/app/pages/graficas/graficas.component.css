@@ -1,12 +1,78 @@
+/* General */
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background-color: #F4F7FC;
+  color: #333;
+  line-height: 1.8;
+  font-size: 18px;
+}
+
+/* Contenedor principal */
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* Títulos */
+h1 {
+  font-size: 2.5rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: 80%;
+  height: 3px;
+  background-color: #3E5064;
+  border-radius: 2px;
+  margin: 8px auto;
+}
+
+/* Tarjetas de las gráficas */
 .card {
-    border-radius: 10px;
-    margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #D1D5DB;
+  overflow: hidden;
 }
 
+/* Encabezado de tarjeta */
 .card-header {
-    border-radius: 10px 10px 0 0 !important;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
 }
 
+/* Colores personalizados para las tarjetas */
+.bg-primary {
+  background: linear-gradient(45deg, #3E5064, #56697D) !important;
+}
+
+.bg-info {
+  background: linear-gradient(45deg, #17A2B8, #63C8D7) !important;
+}
+
+/* Texto dentro de la tarjeta */
+.card-title {
+  margin: 0;
+}
+
+/* Contenedor de gráficas */
 .chart-container {
-    min-height: 300px;
+  position: relative;
+  height: 400px;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Ajustes visuales para la interacción */
+.card:hover {
+  transform: scale(1.02);
+  transition: all 0.3s ease;
 }
