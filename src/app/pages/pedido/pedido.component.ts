@@ -24,6 +24,7 @@ export class PedidoComponent {
   cantidadSeleccionada: number = 1;
   mensaje='';
   telefonoCli: string[] = [];
+  mostrarFormulario:boolean=false;
 
   
   pedido = new Pedido();
@@ -40,6 +41,17 @@ export class PedidoComponent {
     this.pedido.productos = []; 
   
   }
+
+     // Método para mostrar el formulario (modal)
+     mostrarFormularioPedido(): void {
+      this.mostrarFormulario = true;
+    }
+  
+    // Método para ocultar el formulario (modal)
+    cerrarFormulario(): void {
+      this.mostrarFormulario = false;
+    }
+  
 
   // Obtener los clientes
   async getClientes(): Promise<void> {
@@ -126,6 +138,7 @@ recordarPago(clienteTelefono: string, clienteNombre: string) {
   // Seleccionar un pedido
   selectPedido(pedidoSeleccionado: Pedido) {
     this.pedido = pedidoSeleccionado;
+    this.mostrarFormulario = true;  // Mostrar el formulario
   }
 
   // Modificar un pedido

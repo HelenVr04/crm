@@ -18,10 +18,21 @@ export class ProductoComponent {
   categorias: string[] = ['Vidrios', 'Aluminios', 'Accesorios'];
   notificaciones: Producto[] = [];
   proveedores: any[]= [];
+  mostrarFormulario:boolean = false;
 
   constructor(private productoService: ProductoService, private proveedorService: ProveedorService) {
       this.getProveedores();
       this.getProductos();
+  }
+
+   // Método para mostrar el formulario (modal)
+   mostrarFormularioProducto(): void {
+    this.mostrarFormulario = true;
+  }
+
+  // Método para ocultar el formulario (modal)
+  cerrarFormulario(): void {
+    this.mostrarFormulario = false;
   }
 
   //obtener proveedores 
@@ -59,6 +70,7 @@ export class ProductoComponent {
 
   selectProducto(productoSeleccionado: Producto) {
     this.producto = productoSeleccionado;
+    this.mostrarFormulario = true;  // Mostrar el formulario
   }
 
   async updateProducto() {
