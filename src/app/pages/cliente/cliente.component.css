@@ -175,3 +175,17 @@ form {
   float: right;
   cursor: pointer;
 }
+
+.cliente-modal {
+  max-width: 700px;
+  width: 95%;
+}
+
+.modal-content {
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-dialog {
+  margin-top: 80px;
+}
