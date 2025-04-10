@@ -18,7 +18,6 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Teléfono</th>
-                    <th>Fecha de nacimiento</th>
                     <th>Dirección</th>
                     <th>Seleccionar</th>
                 </tr>
@@ -28,7 +27,6 @@
                     <tr>
                         <td>{{ proveedor.nombre }}</td>
                         <td>{{ proveedor.telefono }}</td>
-                        <td>{{ proveedor.fechaCumpleanios }}</td>
                         <td>{{ proveedor.calle }}, {{ proveedor.ciudad }}, {{ proveedor.codigoPostal }}</td>
                         <td>
                             <button class="btn btn-info" (click)="selectProveedor(proveedor)">Seleccionar</button>
@@ -68,16 +66,6 @@
                       <small class="text-danger">El teléfono debe contener 10 dígitos.</small>
                     }
                   </div>
-      
-                  <!-- Fecha de nacimiento -->
-                  <div class="mb-3">
-                    <label class="form-label">Fecha de nacimiento:</label>
-                    <input type="date" class="form-control" [(ngModel)]="proveedor.fechaCumpleanios" name="fechaCumpleanios" required #fechaCumpleanios="ngModel"/>
-                    @if (fechaCumpleanios.invalid && fechaCumpleanios.touched) {
-                      <small class="text-danger">La fecha de cumpleaños es obligatoria.</small>
-                    }
-                  </div>
-      
                   <!-- Dirección -->
                   <div class="mb-3">
                     <label class="form-label">Calle:</label>

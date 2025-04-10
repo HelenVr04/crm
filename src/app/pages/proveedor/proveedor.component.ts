@@ -36,7 +36,7 @@ export class ProveedorComponent {
 
   // Método para validar el proveedor
   validarProveedor(): boolean {
-    if (!this.proveedor.nombre || !this.proveedor.telefono || !this.proveedor.fechaCumpleanios || 
+    if (!this.proveedor.nombre || !this.proveedor.telefono || 
         !this.proveedor.calle || !this.proveedor.ciudad || !this.proveedor.codigoPostal) {
       alert('Por favor, completa todos los campos del proveedor.');
       return false;

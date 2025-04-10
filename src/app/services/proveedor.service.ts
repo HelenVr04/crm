@@ -20,7 +20,6 @@ export class ProveedorService {
       const proveedorData = {
         nombre: proveedor.nombre,
         telefono: proveedor.telefono,
-        fechaCumpleanios: proveedor.fechaCumpleanios,
         calle: proveedor.calle,
         ciudad: proveedor.ciudad,
         codigoPostal: proveedor.codigoPostal,
@@ -35,7 +34,6 @@ export class ProveedorService {
       return updateDoc(documentRef, {
         nombre: proveedor.nombre,
         telefono: proveedor.telefono,
-        fechaCumpleanios: proveedor.fechaCumpleanios,
         calle: proveedor.calle,
         ciudad: proveedor.ciudad,
         codigoPostal: proveedor.codigoPostal,
