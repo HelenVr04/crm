@@ -20,7 +20,6 @@
 
     <h1 class="mb-4 text-center">GESTIÓN DE CLIENTES</h1>
     <h2 class="mb-3">Lista de Clientes</h2>
-    <button class="btn btn-primary mb-3" (click)="mostrarFormularioCliente()">Agregar Cliente</button>
 
     @if (clientes) {
         <table class="table table-striped">
@@ -54,84 +53,6 @@
     } @else {
         <h3 class="text-danger">No hay clientes disponibles</h3>
     }
-    @if (mostrarFormulario) {
-        <div class="modal d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5);">
-            <div class="modal-dialog cliente-modal">
-            <div class="modal-content p-3">
-              <div class="modal-header">
-                <h5 class="modal-title">Formulario de Cliente</h5>
-                <button type="button" class="btn-close" (click)="cerrarFormulario()"></button>
-              </div>
-              <div class="modal-body">
-                <!-- Tu formulario aquí -->
-                <form #clienteForm="ngForm">
-                  <!-- Nombre -->
-                  <div class="mb-3">
-                    <label class="form-label">Nombre:</label>
-                    <input type="text" class="form-control" [(ngModel)]="cliente.nombre" name="nombre" required minlength="7" #nombre="ngModel"/>
-                    @if (nombre.invalid && nombre.touched) {
-                      <small class="text-danger">Debe registrar el nombre completo del cliente (mínimo 7 caracteres).</small>
-                    }
-                  </div>
-                  <!-- Teléfono -->
-                  <div class="mb-3">
-                    <label class="form-label">Teléfono:</label>
-                    <input type="text" class="form-control" [(ngModel)]="cliente.telefono" name="telefono" required pattern="\d{10}" #telefono="ngModel"/>
-                    @if (telefono.invalid && telefono.touched) {
-                      <small class="text-danger">El teléfono debe contener 10 dígitos.</small>
-                    }
-                  </div>
-                  <!-- Correo -->
-                  <div class="mb-3">
-                    <label class="form-label">Correo Electrónico:</label>
-                    <input type="email" class="form-control" [(ngModel)]="cliente.correo" name="correo" required #correo="ngModel"/>
-                    @if (correo.invalid && correo.touched) {
-                      <small class="text-danger">Debe registrar un correo electrónico válido.</small>
-                    }
-                  </div>
-                  <!-- Fecha de nacimiento -->
-                  <div class="mb-3">
-                    <label class="form-label">Fecha de nacimiento:</label>
-                    <input type="date" class="form-control" [(ngModel)]="cliente.fechaCumpleanios" name="fechaCumpleanios" required #fechaCumpleanios="ngModel"/>
-                    @if (fechaCumpleanios.invalid && fechaCumpleanios.touched) {
-                      <small class="text-danger">La fecha de cumpleaños es obligatoria.</small>
-                    }
-                  </div>
-                  <!-- Dirección -->
-                  <div class="mb-3">
-                    <label class="form-label">Calle:</label>
-                    <input type="text" class="form-control" [(ngModel)]="cliente.calle" name="calle" required/>
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">Ciudad:</label>
-                    <input type="text" class="form-control" [(ngModel)]="cliente.ciudad" name="ciudad" required/>
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">Código Postal:</label>
-                    <input type="text" class="form-control" [(ngModel)]="cliente.codigoPostal" name="codigoPostal" required/>
-                  </div>
-                </form>
-              </div>
-      
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="cerrarFormulario()">Cancelar</button>
-      
-                <!-- Mostrar solo si se está agregando -->
-                 @if(!cliente.id){
-                    <button class="btn btn-success" (click)="insertarCliente()" [disabled]="clienteForm.invalid">Agregar</button>
-
-                 }
-                 @if(cliente.id){
-                 <!-- Mostrar solo si se está editando (cliente seleccionado) -->
-                <button  class="btn btn-warning" (click)="updateCliente()">Modificar</button>
-                <button  class="btn btn-danger" (click)="deleteCliente()">Eliminar</button>
-                 }
-              </div>
-            </div>
-          </div>
-        </div>
-      }
-      
 
     @if(mostrarModal){
         <div class="modal">
@@ -152,5 +73,64 @@
         </div>
     }
 
+    <div class="mt-4">
+        <h3>Formulario de Clientes</h3>
+        <form #clienteForm="ngForm">
+            <div class="mb-3">
+                <label class="form-label">NOMBRE:</label>
+                <input type="text" class="form-control" [(ngModel)]="cliente.nombre" name="nombre" required minlength="7" #nombre="ngModel"/>
+                @if (nombre.invalid && nombre.touched) {
+                    <small class="text-danger">Debe registrar el nombre completo del cliente (mínimo 7 caracteres).</small>
+                }
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">TELÉFONO:</label>
+                <input type="text" class="form-control" [(ngModel)]="cliente.telefono" name="telefono" required pattern="\d{10}" #telefono="ngModel"/>
+                @if (telefono.invalid && telefono.touched) {
+                    <small class="text-danger">El teléfono debe contener 10 dígitos.</small>
+                }
+            </div>
+            <div>
+                <label class="form-label">CORREO ELECTRÓNICO:</label>
+                <input type="email" class="form-control" [(ngModel)]="cliente.correo" name="correo" required #correo="ngModel"/>
+                @if (correo.invalid && correo.touched) {
+                    <small class="text-danger">Debe registrar un correo electrónico válido.</small>
+                }
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">FECHA DE NACIMIENTO:</label>
+                <input type="date" class="form-control" [(ngModel)]="cliente.fechaCumpleanios" name="fechaCumpleanios" required #fechaCumpleanios="ngModel"/>
+                @if (fechaCumpleanios.invalid && fechaCumpleanios.touched) {
+                    <small class="text-danger">La fecha de cumpleaños es obligatoria.</small>
+                }
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">DIRECCIÓN:</label>
+                <label class="form-label">CALLE:</label>
+                <input type="text" class="form-control" [(ngModel)]="cliente.calle" name="calle" required minlength="3" #calle="ngModel"/>
+                @if (calle.invalid && calle.touched) {
+                    <small class="text-danger">La calle debe contener al menos 3 caracteres.</small>
+                }
+                <label class="form-label">CIUDAD:</label>
+                <input type="text" class="form-control" [(ngModel)]="cliente.ciudad" name="ciudad" required minlength="3" #ciudad="ngModel"/>
+                @if (ciudad.invalid && ciudad.touched) {
+                    <small class="text-danger">La ciudad debe contener al menos 3 caracteres.</small>
+                }
+                <label class="form-label">CÓDIGO POSTAL:</label>
+                <input type="text" class="form-control" [(ngModel)]="cliente.codigoPostal" name="codigoPostal" required pattern="\d{5}" #codigoPostal="ngModel"/>
+                @if (codigoPostal.invalid && codigoPostal.touched) {
+                    <small class="text-danger">El código postal debe contener 5 dígitos numéricos.</small>
+                }
+            </div>
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-primary" (click)="insertarCliente()" [disabled]="clienteForm.invalid">Agregar</button>
+                <button type="button" class="btn btn-warning" (click)="updateCliente()" [disabled]="clienteForm.invalid">Modificar Cliente</button>
+                <button type="button" class="btn btn-danger" (click)="deleteCliente()">Eliminar</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

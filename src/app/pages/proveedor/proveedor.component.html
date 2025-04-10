@@ -10,7 +10,6 @@
 
     <h1 class="mb-4 text-center">GESTIÓN DE PROVEEDORES</h1>
     <h2 class="mb-3">Lista de Proveedores</h2>
-    <button class="btn btn-primary mb-3" (click)="mostrarFormularioProveedor()">Agregar Proveedor</button>
 
     @if (proveedores.length > 0) {
         <table class="table table-striped">
@@ -41,86 +40,63 @@
         <h3 class="text-danger">No hay proveedores disponibles</h3>
     }
 
-    @if (mostrarFormulario) {
-        <div class="modal d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5);">
-          <div class="modal-dialog cliente-modal">
-            <div class="modal-content p-3">
-              <div class="modal-header">
-                <h5 class="modal-title">Formulario de Proveedor</h5>
-                <button type="button" class="btn-close" (click)="cerrarFormulario()"></button>
-              </div>
-              <div class="modal-body">
-                <form #proveedorForm="ngForm">
-                  <!-- Nombre -->
-                  <div class="mb-3">
-                    <label class="form-label">Nombre:</label>
-                    <input type="text" class="form-control" [(ngModel)]="proveedor.nombre" name="nombre" required minlength="7" #nombre="ngModel"/>
-                    @if (nombre.invalid && nombre.touched) {
-                      <small class="text-danger">El nombre debe tener al menos 7 caracteres.</small>
-                    }
-                  </div>
-      
-                  <!-- Teléfono -->
-                  <div class="mb-3">
-                    <label class="form-label">Teléfono:</label>
-                    <input type="text" class="form-control" [(ngModel)]="proveedor.telefono" name="telefono" required pattern="\d{10}" #telefono="ngModel"/>
-                    @if (telefono.invalid && telefono.touched) {
-                      <small class="text-danger">El teléfono debe contener 10 dígitos.</small>
-                    }
-                  </div>
-      
-                  <!-- Fecha de nacimiento -->
-                  <div class="mb-3">
-                    <label class="form-label">Fecha de nacimiento:</label>
-                    <input type="date" class="form-control" [(ngModel)]="proveedor.fechaCumpleanios" name="fechaCumpleanios" required #fechaCumpleanios="ngModel"/>
-                    @if (fechaCumpleanios.invalid && fechaCumpleanios.touched) {
-                      <small class="text-danger">La fecha de cumpleaños es obligatoria.</small>
-                    }
-                  </div>
-      
-                  <!-- Dirección -->
-                  <div class="mb-3">
-                    <label class="form-label">Calle:</label>
-                    <input type="text" class="form-control" [(ngModel)]="proveedor.calle" name="calle" required minlength="5" #calle="ngModel"/>
-                    @if (calle.invalid && calle.touched) {
-                      <small class="text-danger">La calle debe tener al menos 5 caracteres.</small>
-                    }
-                  </div>
-      
-                  <div class="mb-3">
-                    <label class="form-label">Ciudad:</label>
-                    <input type="text" class="form-control" [(ngModel)]="proveedor.ciudad" name="ciudad" required minlength="3" #ciudad="ngModel"/>
-                    @if (ciudad.invalid && ciudad.touched) {
-                      <small class="text-danger">La ciudad debe tener al menos 3 caracteres.</small>
-                    }
-                  </div>
-      
-                  <div class="mb-3">
-                    <label class="form-label">Código Postal:</label>
-                    <input type="text" class="form-control" [(ngModel)]="proveedor.codigoPostal" name="codigoPostal" required pattern="\d{5}" #codigoPostal="ngModel"/>
-                    @if (codigoPostal.invalid && codigoPostal.touched) {
-                      <small class="text-danger">El código postal debe tener exactamente 5 dígitos.</small>
-                    }
-                  </div>
-                </form>
-              </div>
-      
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="cerrarFormulario()">Cancelar</button>
-      
-                @if (!proveedor.id) {
-                  <button class="btn btn-success" (click)="insertarProveedor()" [disabled]="proveedorForm.invalid">Agregar</button>
+    <div class="mt-4">
+        <h3>Formulario de Proveedores</h3>
+        <form #proveedorForm="ngForm">
+            <div class="mb-3">
+                <label class="form-label">NOMBRE:</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.nombre" name="nombre" required minlength="7" #nombre="ngModel"/>
+                @if (nombre.invalid && nombre.touched) {
+                    <small class="text-danger">El nombre debe tener al menos 7 caracteres.</small>
                 }
-      
-                @if (proveedor.id) {
-                  <button class="btn btn-warning" (click)="updateProveedor()" [disabled]="proveedorForm.invalid">Modificar</button>
-                  <button class="btn btn-danger" (click)="deleteProveedor()">Eliminar</button>
-                }
-              </div>
             </div>
-          </div>
-        </div>
-      }      
+
+            <div class="mb-3">
+                <label class="form-label">TELÉFONO:</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.telefono" name="telefono" required pattern="\d{10}" #telefono="ngModel"/>
+                @if (telefono.invalid && telefono.touched) {
+                    <small class="text-danger">El teléfono debe contener 10 dígitos.</small>
+                }
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">FECHA DE NACIMIENTO:</label>
+                <input type="date" class="form-control" [(ngModel)]="proveedor.fechaCumpleanios" name="fechaCumpleanios" required #fechaCumpleanios="ngModel"/>
+                @if (fechaCumpleanios.invalid && fechaCumpleanios.touched) {
+                    <small class="text-danger">La fecha de cumpleaños es obligatoria.</small>
+                }
+            </div>
+            <div class="mb-3">
+                <label class="form-label">DIRECCIÓN:</label>
+                <label class="form-label">CALLE:</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.calle" name="calle" required minlength="5" #calle="ngModel"/>
+                @if (calle.invalid && calle.touched) {
+                    <small class="text-danger">La calle debe tener al menos 5 caracteres.</small>
+                }
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">CIUDAD:</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.ciudad" name="ciudad" required minlength="3" #ciudad="ngModel"/>
+                @if (ciudad.invalid && ciudad.touched) {
+                    <small class="text-danger">La ciudad debe tener al menos 3 caracteres.</small>
+                }
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">CÓDIGO POSTAL:</label>
+                <input type="text" class="form-control" [(ngModel)]="proveedor.codigoPostal" name="codigoPostal" required pattern="\d{5}" #codigoPostal="ngModel"/>
+                @if (codigoPostal.invalid && codigoPostal.touched) {
+                    <small class="text-danger">El código postal debe tener exactamente 5 dígitos.</small>
+                }
+            </div>
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-primary" (click)="insertarProveedor()" [disabled]="proveedorForm.invalid">Agregar</button>
+                <button type="button" class="btn btn-warning" (click)="updateProveedor()" [disabled]="proveedorForm.invalid">Modificar</button>
+                <button type="button" class="btn btn-danger" (click)="deleteProveedor()">Eliminar</button>
+            </div>
+        </form>
+    </div>
 
 </body>
 </html>

@@ -14,21 +14,10 @@ export class ProveedorComponent {
 
   proveedores: any;
   proveedor = new Proveedor();
-  mostrarFormulario: boolean = false;
 
   constructor(private proveedorService: ProveedorService) {
     this.getProveedores();
   }
-
-    // Método para mostrar el formulario (modal)
-    mostrarFormularioProveedor(): void {
-      this.mostrarFormulario = true;
-    }
-  
-    // Método para ocultar el formulario (modal)
-    cerrarFormulario(): void {
-      this.mostrarFormulario = false;
-    }
 
   async getProveedores(): Promise<void> {
     this.proveedores = await firstValueFrom(this.proveedorService.getProvedores());
@@ -61,7 +50,6 @@ export class ProveedorComponent {
 
   selectProveedor(proveedorSeleccionado: Proveedor) {
     this.proveedor = proveedorSeleccionado;
-    this.mostrarFormulario = true;  // Mostrar el formulario
   }
 
   async updateProveedor() {
